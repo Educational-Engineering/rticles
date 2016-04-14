@@ -1,0 +1,192 @@
+\ProvidesPackage{eTutorial}
+
+
+% ============ Input Encoding ================
+
+\usepackage[utf8]{inputenc}
+
+\usepackage[T1]{fontenc}
+
+% activate={true,nocompatibility} - activate protrusion and expansion
+% final - enable microtype; use "draft" to disable
+% tracking=true, kerning=true, spacing=true - activate these techniques
+% factor=1100 - add 10% to the protrusion amount (default is 1000)
+% stretch=10, shrink=10 - reduce stretchability/shrinkability (default is 20/20)
+\usepackage[activate={true,nocompatibility},final,tracking=true,kerning=true,spacing=true,factor=1000,stretch=10,shrink=10]{microtype}
+
+% ============= Avoid page breaks after paragraph and subsection =====================
+\usepackage{xpatch}
+\xpretocmd{\paragraph}{\needspace{1in}}{}{}
+\xpretocmd{\subsubsection}{\needspace{1in}}{}{}
+
+% ============ Mathematik ================
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+
+% ============ Tables ================
+\usepackage{longtable}
+\usepackage{booktabs}
+\usepackage{array}  
+
+%more space between rows in Tables
+\renewcommand{\arraystretch}{1.3} 
+\newcommand{\ra}[1]{\renewcommand{\arraystretch}{#1}}
+
+
+% ============ Absaetze ================
+\setlength{\parindent}{0pt}
+\setlength{\parskip}{4pt}
+\setkomafont{subparagraph}{\normalsize}
+
+
+
+% ============ Bilder anpassen ================
+\usepackage{graphicx}
+\usepackage[export]{adjustbox}
+
+
+% ============ Fonts ================
+\usepackage{textcomp}
+
+
+
+\usepackage[defaultsans,osfigures,scale=1.0]{opensans} %% Alternatively
+
+
+
+
+% ============ Colors & Boxes ================
+\usepackage[framemethod=TikZ]{mdframed}
+\usepackage{color}
+\definecolor{logoColor}{RGB}{255,127,0} %orange
+\definecolor{taskColor}{RGB}{141,198,63} %green
+\definecolor{infoColor}{RGB}{0,155,240} %blue
+\definecolor{abstractColor}{RGB}{238,42,123} %red
+\definecolor{orderColor}{RGB}{255,236,0} %yellow
+\definecolor{gray}{RGB}{232,233,235}
+\definecolor{grayLighter}{RGB}{241,242,242}
+
+\mdfdefinestyle{task}{%
+    linecolor=taskColor,
+    outerlinewidth=1pt,
+    roundcorner=10pt,
+    innertopmargin=\baselineskip,
+    innerbottommargin=\baselineskip,
+    innerrightmargin=20pt,
+    innerleftmargin=20pt,
+    nobreak=true,
+    backgroundcolor=gray}
+\mdfdefinestyle{info}{%
+    linecolor=infoColor,
+    outerlinewidth=1pt,
+    roundcorner=10pt,
+    innertopmargin=\baselineskip,
+    innerbottommargin=\baselineskip,
+    innerrightmargin=20pt,
+    innerleftmargin=20pt,
+    nobreak=true,
+    backgroundcolor=gray}
+\mdfdefinestyle{abstract}{%
+    linecolor=abstractColor,
+    outerlinewidth=1pt,
+    roundcorner=10pt,
+    innertopmargin=\baselineskip,
+    innerbottommargin=\baselineskip,
+    innerrightmargin=20pt,
+    innerleftmargin=20pt,
+    nobreak=true,
+    backgroundcolor=gray}
+\mdfdefinestyle{order}{%
+    linecolor=orderColor,
+    outerlinewidth=1pt,
+    roundcorner=10pt,
+    innertopmargin=\baselineskip,
+    innerbottommargin=\baselineskip,
+    innerrightmargin=20pt,
+    innerleftmargin=20pt,
+    nobreak=true,
+    backgroundcolor=gray}
+\mdfdefinestyle{code}{
+    topline=false,
+    rightline=false,
+    leftline=false,
+    bottomline=false,
+    roundcorner=10pt,
+    innertopmargin=10pt,
+    innerbottommargin=10pt,
+    innerrightmargin=10pt,
+    innerleftmargin=10pt,
+    nobreak=true,
+    backgroundcolor=grayLighter}
+
+\newenvironment {task}
+         {\begin{mdframed}[style=task] }
+         {\end{mdframed} }
+
+ \newenvironment {info}
+          {\begin{mdframed}[style=info] }
+          {\end{mdframed} }
+
+\newenvironment {order}
+         {\begin{mdframed}[style=order] }
+         {\end{mdframed}}
+
+\@ifundefined{abstract}{
+	\newenvironment {abstract}
+        {\begin{mdframed}[style=abstract] }
+         {\end{mdframed}}
+}
+{
+	\renewenvironment {abstract}
+        {\begin{mdframed}[style=abstract] }
+         {\end{mdframed}}
+}
+
+
+
+
+% ============ Syntax Highlighting ================
+\usepackage{listings}
+
+\renewcommand{\ttdefault}{pcr}
+\lstset{
+	basicstyle=\ttfamily,
+	keywordstyle=\ttfamily\bfseries,
+	showstringspaces=false,
+	breaklines=true,
+	breakatwhitespace,
+	commentstyle=\itshape, 
+	mathescape=true
+}
+\lstset{literate=%
+  {Ö}{{\"O}}1
+  {Ä}{{\"A}}1
+  {Ü}{{\"U}}1
+  {ß}{{\ss}}2
+  {ü}{{\"u}}1
+  {ä}{{\"a}}1
+  {ö}{{\"o}}1
+}
+\BeforeBeginEnvironment{lstlisting}{\begin{mdframed}[style=code]\vspace{-.5em}}
+\AfterEndEnvironment{lstlisting}{\vspace{-1em}\end{mdframed}\unskip}
+
+
+
+
+
+
+
+% ============ Links ================
+\usepackage{hyperref}
+\def\UrlBreaks{\do\/\do-}
+\def\UrlBreaks{\do\/\do_}
+\hypersetup{%
+  colorlinks,
+  linkcolor=logoColor,
+  citecolor=black,
+  urlcolor=black
+}
+
+
+
