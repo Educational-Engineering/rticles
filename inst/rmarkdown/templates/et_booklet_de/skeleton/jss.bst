@@ -5,9 +5,9 @@
 %% The original source files were:
 %%
 %% merlin.mbs  (with options: `ay,nat,nm-rvx,keyxyr,dt-beg,yr-par,note-yr,tit-qq,atit-u,trnum-it,vol-bf,volp-com,num-xser,pre-edn,isbn,issn,edpar,pp,ed,xedn,xand,etal-it,revdata,eprint,url,url-blk,doi,nfss')
-%% 
+%%
 %% ** BibTeX style file for JSS publications (http://www.jstatsoft.org/)
-%% 
+%%
 %% Copyright 1994-2007 Patrick W Daly
 %% License: GPL-2
  % ===============================================================
@@ -27,7 +27,8 @@
  % This is an author-year citation style bibliography. As such, it is
  % non-standard LaTeX, and requires a special package file to function properly.
  % Such a package is    natbib.sty   by Patrick W. Daly
- % The form of the \bibitem entries is
+ % The form of the \bibitem entFehler: Couldn't find template file /resources/template.tex
+ries is
  %   \bibitem[Jones et al.(1990)]{key}...
  %   \bibitem[Jones et al.(1990)Jones, Baker, and Smith]{key}...
  % The essential feature is that the label (the part in brackets) consists
@@ -958,7 +959,11 @@ FUNCTION {format.article.crossref}
 {
   word.in
   " \cite{" * crossref * "}" *
-}
+}Fehler: Couldn't find template file /resources/template.tex
+Fehler: Couldn't find template file /resources/template.tex
+Fehler: Couldn't find template file /resources/template.tex
+Fehler: Couldn't find template file /resources/template.tex
+
 FUNCTION {format.book.crossref}
 { volume duplicate$ empty$
     { "empty volume in " cite$ * "'s crossref of " * crossref * warning$
