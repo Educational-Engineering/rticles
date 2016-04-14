@@ -20,8 +20,8 @@
 #' @export
 et_booklet_de <- function(..., keep_tex = TRUE) {
 
-  pdf_document_format(...,
-                      format = "et_booklet_de",
-                      template = "template.tex")
+  inherit_pdf_document(...,
+                       template = find_resource("et_booklet_de", "template.tex"),
+                       keep_tex = keep_tex)
 }
 
