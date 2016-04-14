@@ -200,9 +200,7 @@
 $for(author)$$author.name$\\$author.affiliation$$sep$ \And $endfor$
 }
 \title{$title.formatted$}
-$if(keywords.formatted)$
-\Keywords{$for(keywords.formatted)$$keywords.formatted$$sep$, $endfor$}
-$endif$
+
 
 %\Abstract{
 %$abstract$
@@ -242,6 +240,11 @@ $endif$
 $preamble$
 
 \begin{document}
+
+
+$if(keywords.formatted)$
+\Keywords{$for(keywords.formatted)$$keywords.formatted$$sep$, $endfor$}
+$endif$
 
 $body$
 
