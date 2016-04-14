@@ -28,10 +28,10 @@
 % ============ Tables ================
 \usepackage{longtable}
 \usepackage{booktabs}
-\usepackage{array}  
+\usepackage{array}
 
 %more space between rows in Tables
-\renewcommand{\arraystretch}{1.3} 
+\renewcommand{\arraystretch}{1.3}
 \newcommand{\ra}[1]{\renewcommand{\arraystretch}{#1}}
 
 
@@ -144,10 +144,7 @@
          {\end{mdframed}}
 }
 \makeatother
-
-\usepackage{framed}
-
-
+\newenvironment{Shaded}{}{}
 
 % ============ Syntax Highlighting ================
 \usepackage{listings}
@@ -159,7 +156,7 @@
 	showstringspaces=false,
 	breaklines=true,
 	breakatwhitespace,
-	commentstyle=\itshape, 
+	commentstyle=\itshape,
 	mathescape=true
 }
 \lstset{literate=%
@@ -193,9 +190,9 @@
 
 \providecommand{\tightlist}{%
   \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
-  
-  
-\providecommand{\Keywords}[1]{\textbf{\textit{Index terms---}} #1}  
+
+
+\providecommand{\Keywords}[1]{\textbf{\textit{Index terms---}} #1}
 
 \author{
 $for(author)$$author.name$\\$author.affiliation$$sep$ \And $endfor$
