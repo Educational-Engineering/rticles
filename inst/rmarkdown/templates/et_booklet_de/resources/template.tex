@@ -132,7 +132,7 @@
 \newenvironment {order}
          {\begin{mdframed}[style=order] }
          {\end{mdframed}}
-
+\makeatletter
 \@ifundefined{abstract}{
 	\newenvironment {abstract}
         {\begin{mdframed}[style=abstract] }
@@ -143,6 +143,7 @@
         {\begin{mdframed}[style=abstract] }
          {\end{mdframed}}
 }
+\makeatother
 
 
 
