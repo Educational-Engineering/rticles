@@ -240,10 +240,10 @@
 \providecommand{\Keywords}[1]{%
 \section*{Begriffe}%
 \hrule%
-\vspace{-3mm}%
+\vspace{-4mm}%
 \begin{multicols}{3}%
 \begin{itemize}[leftmargin=0mm]
-$for(keywords.formatted)$\item[] $keywords.formatted$ $endfor$
+\item[] keywords \item[] not capitalized \item[] \large{Java} \item[] blubblj lksdajflajs \item[] lore ipsum 
 \end{itemize}%
 \end{multicols}%
 \vspace{-2mm}%
@@ -252,74 +252,76 @@ $for(keywords.formatted)$\item[] $keywords.formatted$ $endfor$
 }
 
 \author{
-$for(author)$$author.name$\\$author.affiliation$$sep$ \And $endfor$
+FirstName LastName\\University/Company \And Second Author\\Affiliation
 }
-\title{$title.formatted$}
+\title{A Capitalized Title: Something about a Package \pkg{foo}}
 
 
 %\Abstract{
-%$abstract$
+%The abstract of the article.
 %}
 %
-%\Plainauthor{$for(author)$$author.name$$sep$, $endfor$}
-%$if(title.plain)$
-%\Plaintitle{$title.plain$}
-%$endif$
-%$if(title.short)$
-%\Shorttitle{$title.short$}
-%$endif$
-%$if(keywords.plain)$
-%\Plainkeywords{$for(keywords.plain)$$keywords.plain$$sep$, $endfor$}
-%$endif$
-%
+%\Plainauthor{FirstName LastName, Second Author}
+%%\Plaintitle{A Capitalized Title: Something about a Package foo}
+%%%\Shorttitle{\pkg{foo}: A Capitalized Title}
+%%%\Plainkeywords{keywords, not capitalized, Java}
+%%
 %%% publication information
 %%% \Volume{50}
 %%% \Issue{9}
 %%% \Month{June}
 %%% \Year{2012}
-%\Submitdate{$submitdate$}
+%\Submitdate{}
 %%% \Acceptdate{2012-06-04}
 %
 %\Address{
-%$for(author)$
-%  $if(author.address)$
-%  $author.name$\\
-%  $author.affiliation$\\
-%  $author.address$\\
-%  $if(author.email)$E-mail: $author.email$\\$endif$
-%  $if(author.url)$URL: $author.url$\\~\\$endif$
-%  $endif$
-%$endfor$
-%}
+%%  %  FirstName LastName\\
+%  University/Company\\
+%  First line Second line\\
+%  E-mail: \href{mailto:name@company.com}{\nolinkurl{name@company.com}}\\
+%  URL: \url{http://rstudio.com}\\~\\
+%  %%  %%}
 
-$preamble$
+\usepackage{amsmath}
 
 \begin{document}
 
 
 
-$if(keywords.formatted)$
 \Keywords
-$endif$
 
-$body$
+\chapter{Introduction}\label{introduction}
 
-$if(natbib)$
-$if(bibliography)$
-$if(biblio-title)$
-$if(book-class)$
-\renewcommand\bibname{$biblio-title$}
-$else$
-\renewcommand\refname{$biblio-title$}
-$endif$
-$endif$
-\bibliography{$for(bibliography)$$bibliography$$sep$,$endfor$}
-$endif$
-$endif$
+This template demonstrates some of the basic latex you'll need to know
+to create a JSS article.
 
-$if(biblatex)$
-\printbibliography$if(biblio-title)$[title=$biblio-title$]$endif$
-$endif$
+\section{Code formatting}\label{code-formatting}
+
+Don't use markdown, instead use the more precise latex commands:
+
+\chapter{R code}\label{r-code}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{s }\OperatorTok{=} \StringTok{"Python syntax highlighting"}
+\BuiltInTok{print} \NormalTok{s}
+\end{Highlighting}
+\end{Shaded}
+
+Can be inserted in regular R markdown blocks.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{x <-}\StringTok{ }\DecValTok{1}\NormalTok{:}\DecValTok{10}
+\NormalTok{x}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+##  [1]  1  2  3  4  5  6  7  8  9 10
+\end{verbatim}
+
+
 
 \end{document}
 

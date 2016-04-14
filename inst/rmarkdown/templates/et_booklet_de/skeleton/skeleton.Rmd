@@ -19,7 +19,7 @@ abstract: >
   The abstract of the article.
 keywords:
   # at least one keyword must be supplied
-  formatted: [keywords, not capitalized, "\\proglang{Java}"]
+  formatted: [keywords, not capitalized, "\\large{Java}", blubblj lksdajflajs, lore ipsum]
   plain:     [keywords, not capitalized, Java]
 preamble: >
   \usepackage{amsmath}
@@ -34,11 +34,13 @@ This template demonstrates some of the basic latex you'll need to know to create
 
 Don't use markdown, instead use the more precise latex commands:
 
-* \proglang{Java}
-* \pkg{plyr}
-* \code{print("abc")}
 
 # R code
+
+```{python, eval=FALSE}
+s = "Python syntax highlighting"
+print s
+```
 
 Can be inserted in regular R markdown blocks.
 
