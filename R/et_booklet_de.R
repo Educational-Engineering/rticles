@@ -36,17 +36,21 @@ et_booklet_de <- function(..., keep_tex = TRUE) {
   base$knitr$opts_chunk$fig.height <- 3.675 # 4.9 * 3:4
   base$knitr$opts_chunk$fig.align <- "center"
 
-  hook_chunk <- function(x, options) {
-    if (output_asis(x, options)) return(x)
-    paste0('\\begin{lstlisting}\n', x, '\\end{lstlisting}')
+  ## a common hook for messages, warnings and errors
+  hook_lst_bf = function(x, options) {
+    paste("\\begin{lstlisting}[basicstyle={\\bfseries}]\n", x,
+          "\\end{lstlisting}\n", sep = "")
   }
-  hook_input <- function(x, options) {
-    paste0(c('\\begin{lstlisting}', x, '\\end{lstlisting}', ''),
-      collapse = '\n')
-  }
-  hook_output <- function(x, options) {
-    paste0('\\begin{lstlisting}\n', x, '\\end{lstlisting}\n')
-  }
+  knit_hooks$set(source = function(x, options) {
+    paste("\\begin{lstlisting}[language=R,numbers=left,stepnumber=2]\n", x,
+          "\\end{lstlisting}\n", sep = "")
+  }, output = function(x, options) {
+    paste("\\begin{lstlisting}[basicstyle={\\ttfamily}]\n", x,
+          "\\end{lstlisting}\n", sep = "")
+  }, warning = hook_lst_bf, message = hook_lst_bf, error = hook_lst_bf)
+
+  ## empty highlight header since it is not useful any more
+  set_header(highlight = "")
 
   base$knitr$knit_hooks$chunk   <- hook_chunk
   base$knitr$knit_hooks$source  <- hook_input
