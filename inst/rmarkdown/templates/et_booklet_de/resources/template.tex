@@ -1,7 +1,6 @@
-\documentclass[12pt,a4paper, twoside=true, BCOR=5mm]{scrbook}
-\usepackage[utf8]{inputenc}
+\documentclass[12pt,a4paper, twoside=false]{scrartcl}
 
-
+\usepackage[ngerman]{babel}
 % ============ Input Encoding ================
 
 \usepackage[utf8]{inputenc}
@@ -52,15 +51,15 @@
 
 
 
+%% use the option 'defaultsans' instead of 'default' to replace the
+%% sans serif font only.
 \usepackage[defaultsans,osfigures,scale=1.0]{opensans} %% Alternatively
-
 
 
 
 % ============ Colors & Boxes ================
 \usepackage[framemethod=TikZ]{mdframed}
 \usepackage{color}
-\definecolor{logoColor}{RGB}{255,127,0} %orange
 \definecolor{taskColor}{RGB}{141,198,63} %green
 \definecolor{infoColor}{RGB}{0,155,240} %blue
 \definecolor{abstractColor}{RGB}{238,42,123} %red
@@ -220,14 +219,14 @@
 
 % ============ Links ================
 \usepackage{hyperref}
-\def\UrlBreaks{\do\/\do-}
-\def\UrlBreaks{\do\/\do_}
 \hypersetup{%
   colorlinks,
-  linkcolor=logoColor,
-  citecolor=black,
-  urlcolor=black
+  linkcolor=infoColor,
+  citecolor=infoColor,
+  urlcolor=infoColor
 }
+
+% ============== E.Tutorial Setings ===============
 
 \providecommand{\tightlist}{%
   \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
@@ -243,7 +242,7 @@
 \vspace{-3mm}%
 \begin{multicols}{3}%
 \begin{itemize}[leftmargin=0mm]
-$for(keywords.formatted)$\item[] $keywords.formatted$ $endfor$
+$for(keywords)$\item[] $keywords$ $endfor$
 \end{itemize}%
 \end{multicols}%
 \vspace{-2mm}%
@@ -252,55 +251,83 @@ $for(keywords.formatted)$\item[] $keywords.formatted$ $endfor$
 }
 
 \author{
-$for(author)$$author.name$\\$author.affiliation$$sep$ \And $endfor$
+$for(author)$$author.name$$sep$ \And $endfor$
 }
 \title{$title.formatted$}
 
 
-%\Abstract{
-%$abstract$
-%}
-%
-%\Plainauthor{$for(author)$$author.name$$sep$, $endfor$}
-%$if(title.plain)$
-%\Plaintitle{$title.plain$}
-%$endif$
-%$if(title.short)$
-%\Shorttitle{$title.short$}
-%$endif$
-%$if(keywords.plain)$
-%\Plainkeywords{$for(keywords.plain)$$keywords.plain$$sep$, $endfor$}
-%$endif$
-%
-%%% publication information
-%%% \Volume{50}
-%%% \Issue{9}
-%%% \Month{June}
-%%% \Year{2012}
-%\Submitdate{$submitdate$}
-%%% \Acceptdate{2012-06-04}
-%
-%\Address{
-%$for(author)$
-%  $if(author.address)$
-%  $author.name$\\
-%  $author.affiliation$\\
-%  $author.address$\\
-%  $if(author.email)$E-mail: $author.email$\\$endif$
-%  $if(author.url)$URL: $author.url$\\~\\$endif$
-%  $endif$
-%$endfor$
-%}
 
 $preamble$
 
 \begin{document}
 
+\begin{titlepage}
+
+\par
+\raisebox{0\height}{\includegraphics[width=0.45\textwidth]{figures/ethlogo-print.png}}%
+\hfill
+\raisebox{0\height}{\includegraphics[width=0.25\textwidth]{figures/Logo.png}
+}%
+\par
+
+\begin{center}
+
+\noindent\rule{\textwidth}{0.4pt}
 
 
-$if(keywords.formatted)$
+$if(title.course)$
+\vspace{0.5 cm} {\large \textsf{$title.course$}}
+$endif$
+
+
+\vspace{0.5 cm} {\LARGE \textbf{ \textsf{$title.main$}}}\\
+\vspace{0.5 cm} {\Large \textsf{$title.subtitle$}}
+
+
+\noindent\rule{\textwidth}{0.4pt}
+\setcounter{tocdepth}{3}
+\tableofcontents
+
+
+$if(keywords)$
 \Keywords
 $endif$
+
+\end{center}
+
+
+ \begin{center}
+  	\vspace{1 cm}Autoren: \\ \vspace{2 mm}$for(author)$$author.name$$sep$, $endfor$ \\
+  	\vspace{0.5cm}E-Mail: \\ \vspace{2 mm} $contact.email$ \\
+   	\vspace{0.5 cm}Datum: \\ \vspace{2 mm} $version.date$ \\
+   	\vspace{0.5 cm}  Version: $version.number$\\
+   	\vspace{2 mm}  Hash: $version.hash$
+
+$if(title.financing)$
+	\vspace{0.5 cm}  $title.financing$
+$endif$
+
+	\vspace{0.5 cm}
+    Trotz sorgfältiger Arbeit schleichen sich manchmal Fehler ein. Die Autoren sind Ihnen für Anregungen und Hinweise dankbar!\\
+    \vfill
+   	\end{center}
+
+    \begin{center}
+       Dieses Material steht unter der Creative-Commons-Lizenz\\
+       \href{http://creativecommons.org/licenses/by-nc-nd/4.0/deed.de}{Namensnennung - Nicht kommerziell - Keine Bearbeitungen 4.0 International.} \\
+    \end{center}
+    \begin{center}
+        \href{http://creativecommons.org/licenses/by-nc-nd/4.0/deed.de}{\includegraphics[scale=0.25]{figures/by-nc-nd_eu.png}}
+    \end{center}
+	\begin{center}
+       Um eine Kopie dieser Lizenz zu sehen, besuchen Sie\\
+       \href{http://creativecommons.org/licenses/by-nc-nd/4.0/deed.de}{http://creativecommons.org/licenses/by-nc-nd/4.0/deed.de}\\
+	\end{center}
+
+\end{titlepage}
+
+
+
 
 $body$
 
