@@ -22,7 +22,7 @@ test_format <- function(name, file_check = TRUE, os_skip = NULL) {
     testdoc <- "testdoc.Rmd"
     rmarkdown::draft(testdoc,
                      system.file("rmarkdown", "templates", name,
-                                 package = "rticles"),
+                                 package = "eTutorialsLayout"),
                      create_dir = FALSE,
                      edit = FALSE)
 
@@ -39,11 +39,8 @@ test_format <- function(name, file_check = TRUE, os_skip = NULL) {
   })
 }
 
-test_format("acm_article")
-test_format("elsevier_article")
-test_format("jss_article")
-test_format("rjournal_article", file_check = FALSE)
-test_format("acs_article", os_skip = "windows")
+test_format("et_booklet_de")
+test_format("et_booklet_en")
 
 
 

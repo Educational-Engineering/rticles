@@ -1,6 +1,6 @@
 \documentclass[12pt,a4paper, twoside=false]{scrartcl}
 
-\usepackage[ngerman]{babel}
+\usepackage[english]{babel}
 % ============ Input Encoding ================
 
 \usepackage[utf8]{inputenc}
@@ -53,7 +53,8 @@
 
 %% use the option 'defaultsans' instead of 'default' to replace the
 %% sans serif font only.
-\usepackage[defaultsans,osfigures,scale=1.0]{opensans} %% Alternatively
+%\usepackage[defaultsans,osfigures,scale=1.0]{opensans} %% Alternatively
+\usepackage[default,osfigures,scale=1.0]{opensans}
 
 
 
@@ -145,6 +146,7 @@
 \makeatother
 
 % ============ Syntax Highlighting ================
+
   % commands and environments needed by pandoc snippets
      % extracted from the output of `pandoc -s`
 \usepackage{fancyvrb}
@@ -174,6 +176,10 @@
 \newcommand{\OperatorTok}[1]{{\textbf{#1}}}
 
 
+
+
+
+
 % ============ Links ================
 \usepackage{hyperref}
 \hypersetup{%
@@ -194,7 +200,7 @@
 
 
 \providecommand{\Keywords}[1]{%
-\section*{Begriffe}%
+\section*{Keywords}%
 \hrule%
 \vspace{-3mm}%
 \begin{multicols}{3}%
@@ -254,9 +260,9 @@ $endif$
 
 
  \begin{center}
-  	\vspace{1 cm}Autoren: \\ \vspace{2 mm}$for(author)$$author.name$$sep$, $endfor$ \\
+  	\vspace{1 cm}Authors: \\ \vspace{2 mm}$for(author)$$author.name$$sep$, $endfor$ \\
   	\vspace{0.5cm}E-Mail: \\ \vspace{2 mm} $contact.email$ \\
-   	\vspace{0.5 cm}Datum: \\ \vspace{2 mm} $version.date$ \\
+   	\vspace{0.5 cm}Date: \\ \vspace{2 mm} $version.date$ \\
    	\vspace{0.5 cm}  Version: $version.number$\\
    	\vspace{2 mm}  Hash: $version.hash$
 
@@ -265,21 +271,21 @@ $if(title.financing)$
 $endif$
 
 	\vspace{0.5 cm}
-    Trotz sorgfältiger Arbeit schleichen sich manchmal Fehler ein. Die Autoren sind Ihnen für Anregungen und Hinweise dankbar!\\
+    The authors try the best to provide an error free work, however there still might be some errors. The Authors are thankful for your feedback and suggestions.
     \vfill
    	\end{center}
 
     \begin{center}
-       Dieses Material steht unter der Creative-Commons-Lizenz\\
-       \href{http://creativecommons.org/licenses/by-nc-nd/4.0/deed.de}{Namensnennung - Nicht kommerziell - Keine Bearbeitungen 4.0 International.} \\
+          This work is licensed under a Creative Commons \\
+          \href{http://creativecommons.org/licenses/by-nc-nd/4.0/}{Attribution-NonCommercial-NoDerivatives 4.0 International License}.\\
+      \end{center}
+      \begin{center}
+        \href{http://creativecommons.org/licenses/by-nc-nd/4.0/}{\includegraphics[scale=0.25]{figures/by-nc-nd_eu.png}}
+      \end{center}
+      \begin{center}
+          To view a copy of this license, visit\\
+          \href{http://creativecommons.org/licenses/by-nc-nd/4.0/}{http://creativecommons.org/licenses/by-nc-nd/4.0/}\\
     \end{center}
-    \begin{center}
-        \href{http://creativecommons.org/licenses/by-nc-nd/4.0/deed.de}{\includegraphics[scale=0.25]{figures/by-nc-nd_eu.png}}
-    \end{center}
-	\begin{center}
-       Um eine Kopie dieser Lizenz zu sehen, besuchen Sie\\
-       \href{http://creativecommons.org/licenses/by-nc-nd/4.0/deed.de}{http://creativecommons.org/licenses/by-nc-nd/4.0/deed.de}\\
-	\end{center}
 
 \end{titlepage}
 

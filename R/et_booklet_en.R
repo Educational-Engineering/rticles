@@ -10,14 +10,14 @@
 #'
 #' \dontrun{
 #' library(rmarkdown)
-#' draft("MyArticle.Rmd", template = "et_booklet_de", package = "eTutorialsLayout")
+#' draft("MyArticle.Rmd", template = "et_booklet_en", package = "eTutorialsLayout")
 #' }
 #'
 #' @export
-et_booklet_de <- function(..., keep_tex = TRUE) {
+et_booklet_en <- function(..., keep_tex = TRUE) {
 
   inherit_pdf_document(...,
-                       template = find_resource("et_booklet_de", "template.tex"),
+                       template = find_resource("et_booklet_en", "template.tex"),
                        keep_tex = keep_tex)
 }
 

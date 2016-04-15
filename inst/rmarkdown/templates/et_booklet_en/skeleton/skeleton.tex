@@ -1,0 +1,932 @@
+\documentclass[12pt,a4paper, twoside=false]{scrartcl}
+
+\usepackage[english]{babel}
+% ============ Input Encoding ================
+
+\usepackage[utf8]{inputenc}
+
+\usepackage[T1]{fontenc}
+
+% activate={true,nocompatibility} - activate protrusion and expansion
+% final - enable microtype; use "draft" to disable
+% tracking=true, kerning=true, spacing=true - activate these techniques
+% factor=1100 - add 10% to the protrusion amount (default is 1000)
+% stretch=10, shrink=10 - reduce stretchability/shrinkability (default is 20/20)
+\usepackage[activate={true,nocompatibility},final,tracking=true,kerning=true,spacing=true,factor=1000,stretch=10,shrink=10]{microtype}
+
+% ============= Avoid page breaks after paragraph and subsection =====================
+\usepackage{xpatch}
+\xpretocmd{\paragraph}{\needspace{1in}}{}{}
+\xpretocmd{\subsubsection}{\needspace{1in}}{}{}
+
+% ============ Mathematik ================
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+
+% ============ Tables ================
+\usepackage{longtable}
+\usepackage{booktabs}
+\usepackage{array}
+
+%more space between rows in Tables
+\renewcommand{\arraystretch}{1.3}
+\newcommand{\ra}[1]{\renewcommand{\arraystretch}{#1}}
+
+
+% ============ Absaetze ================
+\setlength{\parindent}{0pt}
+\setlength{\parskip}{4pt}
+\setkomafont{subparagraph}{\normalsize}
+
+
+
+% ============ Bilder anpassen ================
+\usepackage{graphicx}
+\usepackage[export]{adjustbox}
+
+
+% ============ Fonts ================
+\usepackage{textcomp}
+
+
+
+%% use the option 'defaultsans' instead of 'default' to replace the
+%% sans serif font only.
+%\usepackage[defaultsans,osfigures,scale=1.0]{opensans} %% Alternatively
+\usepackage[default,osfigures,scale=1.0]{opensans}
+
+
+
+% ============ Colors & Boxes ================
+\usepackage[framemethod=TikZ]{mdframed}
+\usepackage{color}
+\definecolor{taskColor}{RGB}{141,198,63} %green
+\definecolor{infoColor}{RGB}{0,155,240} %blue
+\definecolor{abstractColor}{RGB}{238,42,123} %red
+\definecolor{orderColor}{RGB}{255,236,0} %yellow
+\definecolor{gray}{RGB}{232,233,235}
+\definecolor{grayLighter}{RGB}{241,242,242}
+
+\mdfdefinestyle{task}{%
+    linecolor=taskColor,
+    outerlinewidth=1pt,
+    roundcorner=10pt,
+    innertopmargin=\baselineskip,
+    innerbottommargin=\baselineskip,
+    innerrightmargin=20pt,
+    innerleftmargin=20pt,
+    nobreak=true,
+    backgroundcolor=gray}
+\mdfdefinestyle{info}{%
+    linecolor=infoColor,
+    outerlinewidth=1pt,
+    roundcorner=10pt,
+    innertopmargin=\baselineskip,
+    innerbottommargin=\baselineskip,
+    innerrightmargin=20pt,
+    innerleftmargin=20pt,
+    nobreak=true,
+    backgroundcolor=gray}
+\mdfdefinestyle{abstract}{%
+    linecolor=abstractColor,
+    outerlinewidth=1pt,
+    roundcorner=10pt,
+    innertopmargin=\baselineskip,
+    innerbottommargin=\baselineskip,
+    innerrightmargin=20pt,
+    innerleftmargin=20pt,
+    nobreak=true,
+    backgroundcolor=gray}
+\mdfdefinestyle{order}{%
+    linecolor=orderColor,
+    outerlinewidth=1pt,
+    roundcorner=10pt,
+    innertopmargin=\baselineskip,
+    innerbottommargin=\baselineskip,
+    innerrightmargin=20pt,
+    innerleftmargin=20pt,
+    nobreak=true,
+    backgroundcolor=gray}
+\mdfdefinestyle{code}{
+    topline=false,
+    rightline=false,
+    leftline=false,
+    bottomline=false,
+    roundcorner=10pt,
+    innertopmargin=10pt,
+    innerbottommargin=10pt,
+    innerrightmargin=10pt,
+    innerleftmargin=10pt,
+    nobreak=true,
+    backgroundcolor=grayLighter}
+
+\newenvironment {task}
+         {\begin{mdframed}[style=task] }
+         {\end{mdframed} }
+
+ \newenvironment {info}
+          {\begin{mdframed}[style=info] }
+          {\end{mdframed} }
+
+\newenvironment {order}
+         {\begin{mdframed}[style=order] }
+         {\end{mdframed}}
+\makeatletter
+\@ifundefined{abstract}{
+	\newenvironment {abstract}
+        {\begin{mdframed}[style=abstract] }
+         {\end{mdframed}}
+}
+{
+	\renewenvironment {abstract}
+        {\begin{mdframed}[style=abstract] }
+         {\end{mdframed}}
+}
+\makeatother
+
+% ============ Syntax Highlighting ================
+
+  % commands and environments needed by pandoc snippets
+     % extracted from the output of `pandoc -s`
+\usepackage{fancyvrb}
+
+\DefineShortVerb[commandchars=\\\{\}]{\|}
+\DefineVerbatimEnvironment{Highlighting}{Verbatim}{commandchars=\\\{\}}
+          % Add ',fontsize=\small' for more characters per line
+\newenvironment {Shaded}
+        {\begin{mdframed}[style=code] }
+         {\end{mdframed}}
+
+\newcommand{\KeywordTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{\textbf{{#1}}}}
+\newcommand{\BuiltInTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{\textbf{{#1}}}}
+\newcommand{\DataTypeTok}[1]{\textcolor[rgb]{0.56,0.13,0.00}{{#1}}}
+\newcommand{\DecValTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{{#1}}}
+\newcommand{\BaseNTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{{#1}}}
+\newcommand{\FloatTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{{#1}}}
+\newcommand{\CharTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+\newcommand{\StringTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+\newcommand{\CommentTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textit{{#1}}}}
+\newcommand{\OtherTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{{#1}}}
+\newcommand{\AlertTok}[1]{\textcolor[rgb]{1.00,0.00,0.00}{\textbf{{#1}}}}
+\newcommand{\FunctionTok}[1]{\textcolor[rgb]{0.02,0.16,0.49}{{#1}}}
+\newcommand{\RegionMarkerTok}[1]{{#1}}
+\newcommand{\ErrorTok}[1]{\textcolor[rgb]{1.00,0.00,0.00}{\textbf{{#1}}}}
+\newcommand{\NormalTok}[1]{{#1}}
+\newcommand{\OperatorTok}[1]{{\textbf{#1}}}
+
+
+
+
+
+
+% ============ Links ================
+\usepackage{hyperref}
+\hypersetup{%
+  colorlinks,
+  linkcolor=infoColor,
+  citecolor=infoColor,
+  urlcolor=infoColor
+}
+
+% ============== E.Tutorial Setings ===============
+
+\providecommand{\tightlist}{%
+  \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
+
+
+\usepackage{multicol}
+\usepackage{enumitem}
+
+
+\providecommand{\Keywords}[1]{%
+\section*{Keywords}%
+\hrule%
+\vspace{-3mm}%
+\begin{multicols}{3}%
+\begin{itemize}[leftmargin=0mm]
+\item[] keywords \item[] not capitalized \item[] Java 
+\end{itemize}%
+\end{multicols}%
+\vspace{-2mm}%
+\hrule%
+\needspace{.25\textheight}%
+}
+
+\author{
+FirstName LastName \And Second Author
+}
+\title{}
+
+
+
+
+
+\begin{document}
+
+\begin{titlepage}
+
+\par
+\raisebox{0\height}{\includegraphics[width=0.45\textwidth]{figures/ethlogo-print.png}}%
+\hfill
+\raisebox{0\height}{\includegraphics[width=0.25\textwidth]{figures/Logo.png}
+}%
+\par
+
+\begin{center}
+
+\noindent\rule{\textwidth}{0.4pt}
+
+
+\vspace{0.5 cm} {\large \textsf{A Capitalized Title}}
+
+
+\vspace{0.5 cm} {\LARGE \textbf{ \textsf{A Capitalized Title: Something about a Package}}}\\
+\vspace{0.5 cm} {\Large \textsf{A Capitalized Title: Something about a Package foo}}
+
+
+\noindent\rule{\textwidth}{0.4pt}
+\setcounter{tocdepth}{3}
+\tableofcontents
+
+
+\Keywords
+
+\end{center}
+
+
+ \begin{center}
+  	\vspace{1 cm}Authors: \\ \vspace{2 mm}FirstName LastName, Second Author \\
+  	\vspace{0.5cm}E-Mail: \\ \vspace{2 mm} \href{mailto:et@ethz.ch}{\nolinkurl{et@ethz.ch}} \\
+   	\vspace{0.5 cm}Date: \\ \vspace{2 mm} 15 April, 2016 \\
+   	\vspace{0.5 cm}  Version: 1\\
+   	\vspace{2 mm}  Hash: fcc53f8
+
+	\vspace{0.5 cm}  Wir danken bla
+
+	\vspace{0.5 cm}
+    The authors try the best to provide an error free work, however there still might be some errors. The Authors are thankful for your feedback and suggestions.
+    \vfill
+   	\end{center}
+
+    \begin{center}
+          This work is licensed under a Creative Commons \\
+          \href{http://creativecommons.org/licenses/by-nc-nd/4.0/}{Attribution-NonCommercial-NoDerivatives 4.0 International License}.\\
+      \end{center}
+      \begin{center}
+        \href{http://creativecommons.org/licenses/by-nc-nd/4.0/}{\includegraphics[scale=0.25]{figures/by-nc-nd_eu.png}}
+      \end{center}
+      \begin{center}
+          To view a copy of this license, visit\\
+          \href{http://creativecommons.org/licenses/by-nc-nd/4.0/}{http://creativecommons.org/licenses/by-nc-nd/4.0/}\\
+    \end{center}
+
+\end{titlepage}
+
+
+
+
+\section{Modulübersicht}\label{modulubersicht}
+
+Die beiden Konzepte Variablen und Datentypen sind für jede
+Programmierung grundlegend. Bei \textbf{Variablen} handelt es sich um
+Speicherbereiche, in denen Werte gespeichert werden können und der
+\textbf{Datentyp} gibt an, welche Werte erlaubt sind (z.B. nur
+Ganzzahlen). In einem Programm werden Daten verarbeitet, die sich in
+ihrer Art unterscheiden, z.B. Zeichen, Zahlen oder logische Daten.
+Digitale Daten werden immer durch Ziffern dargestellt. Daher auch der
+Name, \emph{digit} bedeutet Ziffer.
+
+\section{Darstellung von Zahlen und Zeichen im
+Computer}\label{darstellung-von-zahlen-und-zeichen-im-computer}
+
+Um die Darstellung von Zeichen, Zahlen und Texten im Computer zu
+verstehen, muss man das \textbf{binäre System} verstehen.
+
+\subsection{Binäres System}\label{binares-system}
+
+Alle Rechner stellen Information im binären System dar. Dieses kennt nur
+zwei Ziffern, nämlich 0 und 1 (im Gegensatz zum Dezimalsystem mit den
+Ziffern 0 bis 9). Eine solche Ziffer wird als \textbf{Bit} bezeichnet
+(Abkürzung für \emph{Binary Digit}, übersetzt „Binäre Ziffer``). Ein Bit
+stellt den kleinsten speicherbaren Wert in einem Computer dar. Jeweils 8
+Bits werden zu einem \textbf{Byte} zusammengefasst. Ein Byte kann somit
+2\textsuperscript{8} = 256 verschiedene Sequenzen von je 8 Bit
+speichern.
+
+\subsection{Darstellung von Zahlen im binären
+System}\label{darstellung-von-zahlen-im-binaren-system}
+
+Betrachten wir die Zahl 91, die binär mit 8 Bit als 01011011 dargestellt
+wird (siehe Tabelle \ref{tab:binaryConversation}). Wir reden deswegen in
+diesem Zusammenhang von der \textbf{Binärdarstellung} von 91 (und nicht
+von der Dezimaldarstellung, die für uns lesefreundlicher ist).
+
+\begin{table}[!htpb]
+\begin{tabular}{|l|p{.8cm}|p{.8cm}|p{.8cm}|p{.8cm}|p{.7cm}|p{.7cm}|p{.7cm}|p{.7cm}|p{.8cm}}
+\cline{1-9} \textbf{Bit} & 8 & 7 & 6 & 5 & 4 & 3 & 3 & 1 &\\
+\cline{1-9} \textbf{Binärwert} & 0 & 1 & 0 & 1 & 1 & 0 & 1 & 1 &\\
+\cline{1-9} \textbf{Wertigkeit} & $2^7=128$ & $2^6=64$ & $2^5=32$ & $2^4=16$ & $2^3=8$ & $2^2=4$ & $2^1=2$ & $2^0=1$ &\\
+\hline \textbf{Dezimalwert} & 0 & 64 & 0 & 16 & 8 & 0 & 2 & 1 & \multicolumn{1}{ p{.8cm}| }{= 91} \\
+\hline
+\end{tabular}
+\caption{Binäre Darstellung der Dezimalzahl 91. Details siehe Text.}
+\label{tab:binaryConversation}
+\end{table}
+
+Eine 8-Bit-Zahl, wie in unserem Beispiel, kann Werte zwischen 00000000
+(0 im Dezimalsystem) und 11111111 (255 im Dezimalsystem) speichern. Für
+die Umrechnung vom Binär- in den Dezimalwert multiplizieren wir für
+jedes Bit den Binärwert mit der Wertigkeit des Bits und summieren diese
+auf. Im binären System können wir mit 8 Bit nur die ganzen Zahlen 0 bis
+255 darstellen. Ist die Zahl, die wir darstellen wollen, grösser, muss
+auch ein grösserer Speicherbereich bereitgestellt werden.
+
+\subsection{Darstellung von Zeichen im binären
+System}\label{darstellung-von-zeichen-im-binaren-system}
+
+Für die Darstellung von Zeichen im Computer wurde der so genannte
+\textbf{ASCII-Code} entwickelt. ASCII steht für \emph{American Standard
+Code for Information Interchange}, was übersetzt so viel heisst wie
+Amerikanische Standardcodierung für den Datenaustausch. Mit Hilfe des
+7-Bit-ASCII-Codes können 128 verschiedene Zeichen (2\textsuperscript{7})
+dargestellt werden oder umgekehrt wird jedem Zeichen ein Bitmuster aus 7
+Bit zugeordnet (siehe Tabelle \ref{tab:ascii}). Die Zeichen entsprechen
+weitgehend einer Computertastatur. Der ASCII-Code wurde später auf 8 Bit
+erweitert, was die Darstellung von 256 Zeichen (2\textsuperscript{8})
+erlaubt.
+
+\begin{table}[!htbp]\centering
+\ra{1.1}
+\begin{tabular}{@{}llcllcllcll@{}}
+\toprule
+\multicolumn{2}{c}{0-31} & & \multicolumn{2}{c}{31-63} & &
+\multicolumn{2}{c}{64-95} & & \multicolumn{2}{c}{96-127}\\
+\cmidrule{1-2} \cmidrule{4-5} \cmidrule{7-8} \cmidrule{10-11}
+Dez & Zeichen & & Dez  & Zeichen & & Dez & Zeichen & & Dez  & Zeichen\\
+\midrule
+0  & NUL & & 32 &  SP & & 64 & @ & & 96  & ` \\
+1  & SOH & & 33 &  !  & & 65 & A & & 97  & a \\
+2  & STX & & 34 &  "' & & 66 & B & & 98  & b \\
+3  & ETX & & 35 &  \# & & 67 & C & & 99  & c \\
+4  & EOT & & 36 &  \$ & & 68 & D & & 100 & d \\
+5  & ENQ & & 37 &  \% & & 69 & E & & 101 & e \\
+6  & ACK & & 38 &  \& & & 70 & F & & 102 & f \\
+7  & BEL & & 39 &  '  & & 71 & G & & 103 & g \\
+8  & BS  & & 40 &  (  & & 72 & H & & 104 & h \\
+9  & HT  & & 41 &  )  & & 73 & I & & 105 & i \\
+10 & LF  & & 42 &  *  & & 74 & J & & 106 & j \\
+11 & VT  & & 43 &  +  & & 75 & K & & 107 & k \\
+12 & FF  & & 44 &  ,  & & 76 & L & & 108 & l \\
+13 & CR  & & 45 &  -  & & 77 & M & & 109 & m \\
+14 & SO  & & 46 &  .  & & 78 & N & & 110 & n \\
+15 & SI  & & 47 &  /  & & 79 & O & & 111 & o \\
+16 & DLE & & 48 &  0  & & 80 & P & & 112 & p \\
+17 & DC1 & & 49 &  1  & & 81 & Q & & 113 & q \\
+18 & DC2 & & 50 &  2  & & 82 & R & & 114 & r \\
+19 & DC3 & & 51 &  3  & & 83 & S & & 115 & s \\
+20 & DC4 & & 52 &  4  & & 84 & T & & 116 & t \\
+21 & NAK & & 53 &  5  & & 85 & U & & 117 & u \\
+22 & SYN & & 54 &  6  & & 86 & V & & 118 & v \\
+23 & ETB & & 55 &  7  & & 87 & W & & 119 & w \\
+24 & CAN & & 56 &  8  & & 88 & X & & 120 & x \\
+25 & EM  & & 57 &  9  & & 89 & Y & & 121 & y \\
+26 & SUB & & 58 &  :  & & 90 & Z & & 122 & z \\
+27 & ESC & & 59 &  ;  & & 91 & [ & & 123 & \{\\
+28 & FS  & & 60 &  <  & & 92 & $\backslash$ & & 124 & $\mid$\\
+29 & GS  & & 61 &  =  & & 93 & ]    & & 125 & \}  \\
+30 & RS  & & 62 &  >  & & 94 & \^{} & & 126 & \textasciitilde \\
+31 & US  & & 63 &  ?  & & 95 & \_   & & 127 & DEL \\
+\bottomrule
+\end{tabular}
+\caption {ASCII-Tabelle}
+\label{tab:ascii}
+\end{table}
+
+Die ASCII-Tabelle enthält auch nicht darstellbare Zeichen (wie etwa ein
+Zeichen, das einen Zeilenumbruch repräsentiert). Die wichtigsten sind in
+Tabelle \ref{tab:asciiHidden} dargestellt:
+
+\begin{table}[!htbp]\centering
+\begin{tabular}{lll}
+\toprule
+Dez & Zeichen & Bedeutung\\
+\midrule
+8   & BS & Backspace. Linkes Zeichen löschen\\
+10  & NL & New Line. Neue Zeile beginnen\\
+32  & SP & Space. Leerzeichen \\
+127 & DEL & Delete. Rechtes Zeichen löschen \\
+\bottomrule
+\end{tabular}
+\label{tab:asciiHidden}
+\caption{Nicht darstellbare Zeichen der ASCII-Tabelle}
+\end{table}
+
+\section{Datentypen}\label{datentypen}
+
+Der \textbf{Datentyp} gibt an, welche Daten in einem Programm
+gespeichert und bearbeitet werden können. Programmiersprachen besitzen
+vordefinierte Datentypen, die sich in der Art der Interpretation der
+gespeicherten Daten und in der Grösse unterscheiden.
+
+\begin{itemize}
+\tightlist
+\item
+  Typ für Zahlenwerte
+\item
+  Typ für Zeichenwerte
+\item
+  Typ für Wahrheitswerte (Boolsche Werte) (siehe Modul 2)
+\end{itemize}
+
+Tabelle \ref{tab:datatypes} gibt einen Überblick über die wichtigsten
+Datentypen, die in vielen Programmiersprachen vorkommen.
+
+\begin{table}[!htbp]\centering 
+\begin{tabular}{@{}llll@{}}     
+\toprule
+ Typ & Beschreibung & Grösse & Wertebereich \\
+ & & in Bit & \\
+\midrule
+ boolean & Boolscher Wert & 1 & true oder false \\
+ char & Zeichen & 16 & Unicode-Zeichen \\
+ byte & Ganzzahl & 8 & $-128 \ldots 127 \;(-2^7 \ldots +2^{7}-1)$ \\
+ short & & 16 & $-32'768 \ldots  32'767 \;(-2^{15} \ldots +2^{15}-1)$ \\
+ int & & 32 & $-2'147'483'648 \ldots2'147'483'647 \;(-2^{31} \ldots +2^{31}-1)$ \\
+ long & & 64 & $-9'223'372'036'854'775'808\ldots$ \\
+ & & &  $9'223'372'036'854'775'807 \; (-2^{63} \ldots +2^{63}-1)$ \\
+ float & Gleitkommazahl & 32 & $+/- 3.40282347 \times 10^{38}$\\
+ double & & 64 & $+/- 1.79769313486231569 \times 10^{308}$ \\
+\bottomrule
+
+\end{tabular}
+\caption{Die wichtigsten Datentypen in Java}
+\label{tab:datatypes}
+\end{table}
+
+\section{Variablen und Konstanten}\label{variablen-und-konstanten}
+
+\textbf{Variablen} einer Programmiersprache sind denen der Mathematik
+ähnlich. Variablen haben einen Namen über den sie angesprochen werden,
+und dienen dazu, einen Wert im Bereich eines bestimmten Datentyps zu
+speichern. Der Wert der Variable kann sich im Verlaufe des Programms
+ändern (er kann variieren, daher der Name). Um eine Variable in einem
+Programm verwenden zu können, sind folgende Operationen notwendig:
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\tightlist
+\item
+  Deklaration
+\item
+  Initialisierung
+\end{enumerate}
+
+\subsection{Deklaration}\label{deklaration}
+
+Bevor eine Variable in einem Programm verwendet werden kann, muss sie
+\textbf{deklariert} werden. Das heisst, dass Sie als Programmiererin
+oder Programmierer einen Speicherbereich für einen bestimmten Datentyp
+belegen und diesem Speicherplatz einen Namen geben. Über diesen Namen
+kann der Speicherbereich während des Programmablaufs aufgerufen werden.
+Namen von Variablen beginnen in Java gemäss Konvention jeweils mit einem
+Kleinbuchstaben, sie dürfen keine Leerzeichen enthalten und sollten
+möglichst aussagekräftig sein.
+
+\paragraph{Schreibweise:}\label{schreibweise}
+
+\begin{verbatim}
+Datentyp name;
+\end{verbatim}
+
+\paragraph{Beispiel:}\label{beispiel}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{// Variable a vom Typ Integer}
+\DataTypeTok{int} \NormalTok{a;}
+
+\CommentTok{// Variable b vom Typ Double}
+\DataTypeTok{double} \NormalTok{b;}
+
+\CommentTok{// Variable c vom Typ Character}
+\DataTypeTok{char} \NormalTok{c;}
+\end{Highlighting}
+\end{Shaded}
+
+Mehrere Variablen vom gleichen Typ können auch wie in folgendem Beispiel
+in einer Deklaration geschrieben werden:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{// 3 Variablem vom Typ Integer}
+\DataTypeTok{int} \NormalTok{meineZahl1, meineZahl2, meineZahl3;}
+\end{Highlighting}
+\end{Shaded}
+
+\subsection{Initialisierung und
+Wertzuweisung}\label{initialisierung-und-wertzuweisung}
+
+Das \textbf{Zuweisen} von Werten geschieht mit dem Zuweisungsoperator.
+In Java wird hierfür ein \textbf{Gleichheitszeichen} (\textbf{=})
+verwendet. Dabei wird der Wert des Ausdrucks rechts des
+Zuweisungsoperators der Variablen auf der linken Seite zugewiesen. Wenn
+einer Variable das erste Mal ein Wert zugewiesen wird, spricht man von
+einer \textbf{Initialisierung}.
+
+\paragraph{Schreibweise:}\label{schreibweise-1}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{variable = wert;}
+\end{Highlighting}
+\end{Shaded}
+
+\paragraph{Beispiel:}\label{beispiel-1}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{meineZahl = }\DecValTok{4}\NormalTok{;}
+\CommentTok{// meineZahl hat den Wert 4}
+\end{Highlighting}
+\end{Shaded}
+
+Der Wert einer Variablen kann sich im Verlaufe eines Programms ändern.
+In folgendem Beispiel wird in der Variablen \texttt{meineZahl} zuerst
+der Wert 4 gespeichert, der dann in einer weiteren Zeile mit dem Wert 6
+überchrieben wird.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{meineZahl = }\DecValTok{4}\NormalTok{;}
+\CommentTok{// Wert von meineZahl ist 4}
+
+\NormalTok{meineZahl = }\DecValTok{6}\NormalTok{;}
+\CommentTok{// Wert von meineZahl ist 6}
+\end{Highlighting}
+\end{Shaded}
+
+Bei einer Zuweisung handelt es sich also immer um einen schreibenden
+Zugriff auf eine Variable mit dem Resultat, dass sich deren Wert ändern
+kann. Der alte Wert wird überschrieben. Damit einer Variablen ein Wert
+zugewiesen werden kann, darf die Variable nicht als Konstante definiert
+sein (siehe nächster Abschnitt) und der Typ der Variablen muss mit dem
+Typ des Werts kompatibel sein. Auf jeden Fall kompatibel sind Variablen
+und Werte desselben Datentypes. Wenn die Datentypen nicht
+übereinstimmen, nimmt Java eine implizite \textbf{Typkonvertierung} vor.
+Dies ist jedoch eine häufige Fehlerquelle und sollte daher vermieden
+werden. Bei der impliziten Typkonvertierung in Java werden nur
+Typkonvertierung durchgeführt, wenn sie ohne Informationsverlust
+erfolgen kann, also wenn der Zieldatentyp einen gleichen oder grösseren
+Wertebereich hat als der Ausgangsdatentyp.
+
+\paragraph{Beispiel:}\label{beispiel-2}
+
+Ein Wert vom Typ \texttt{int} kann einer Variablen vom Typ
+\texttt{double} zugewiesen werden:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{// Variable ganzeZahl vom Typ Integer}
+\DataTypeTok{int} \NormalTok{ganzeZahl;}
+\CommentTok{// Variable kommaZahl vom Typ Double}
+\DataTypeTok{double} \NormalTok{kommaZahl;}
+
+\NormalTok{ganzeZahl = }\DecValTok{4}\NormalTok{;}
+\NormalTok{kommaZahl = ganzeZahl;}
+\CommentTok{// Variable kommaZahl wird in zum Typ Integer konvertiert}
+\end{Highlighting}
+\end{Shaded}
+
+Möchte man eine Zuweisung machen, bei der der Zieldatentyp einen
+gleineren Wertebereich hat, muss eine so genannte explizite
+Typenkonvertierung durchgeführt werden, das sogenannte Typecasting. Die
+Programmiererin/der Programmierer ist dabei selber dafür verantwortlich,
+dass die Zuweisung möglich ist.
+
+\paragraph{Beispiel:}\label{beispiel-3}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{// Variable d vom Typ Double}
+\DataTypeTok{double} \NormalTok{d = }\FloatTok{1.3}\NormalTok{;}
+
+\DataTypeTok{float} \NormalTok{f = (}\DataTypeTok{float}\NormalTok{)d;}
+\CommentTok{// Variable d muss explizit zum Typ Float konvertiert }
+\CommentTok{// werden}
+\end{Highlighting}
+\end{Shaded}
+
+Eine Variable kann in einem Programm nur in einem bestimmten Bereich des
+Programms gelten. Weiteres dazu erfahren Sie in einem späteren Modul.
+
+\subsection{Konstanten}\label{konstanten}
+
+\textbf{Konstanten} werden wie Variablen mit einem Namen bezeichnet. Sie
+enthalten während der gesamten Programmausführung einen konstanten Wert.
+Es kann also nach der Initialisierung keine weitere Wertzuweisung
+vorgenommen werden. Konstanten können jedoch Teil einer Wertzuweisung an
+Variablen sein. Eine Konstante wird zusätzlich zu Namen und Datentyp mit
+dem Schlüsselwort \texttt{final} deklariert.
+
+\paragraph{Schreibweise:}\label{schreibweise-2}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\DataTypeTok{final} \NormalTok{Datentyp name;}
+\end{Highlighting}
+\end{Shaded}
+
+\paragraph{Beispiel:}\label{beispiel-4}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{//Deklaration und Initialisierung der Konstante k}
+\DataTypeTok{final} \DataTypeTok{int} \NormalTok{k = }\DecValTok{4}\NormalTok{;}
+\end{Highlighting}
+\end{Shaded}
+
+\section{Operatoren und Ausdrücke}\label{operatoren-und-ausdrucke}
+
+\subsection{Operatoren (Teil I)}\label{operatoren-teil-i}
+
+Um in einem Programm Berechnungen durchzuführen zu können, stehen
+folgende \textbf{arithmetische Operatoren} zur Verfügung:
+
+\begin{table}[!htpb]\centering
+\begin{tabular}{@{}llll@{}}
+
+\toprule
+ Operator & Ausdruck & Beschreibung & Liefert \\
+\midrule
+ + & a + b & Addition & Summe \\
+ - & a - b& Subtraktion & Differenz \\
+ $\ast$ & a $\ast$ b& Multiplikation& Produkt \\
+ / & a / b& Division& Quotient \\
+ \% & a \% b& Modulo& Ganzzahliger Rest einer Division \\
+\bottomrule
+\end{tabular}
+\caption{Arithmetische Operatoren in Java}
+\label{tab:Operators1}
+\end{table}
+
+Weitere Operatoren (logische und Vergleichsoperatoren) lernen Sie in
+Modul 2 kennen.
+
+\subsection{Ausdrücke}\label{ausdrucke}
+
+\textbf{Ausdrücke} (engl. \emph{expressions}) sind in einer
+Programmiersprache Teil der kleinsten ausführbaren Einheiten eines
+Programms. Dabei handelt es sich um Verarbeitungsvorschriften, die sich
+aus \textbf{Variablen}, \textbf{Konstanten} und \textbf{Operatoren}
+zusammensetzen können und ein Resultat ergeben. Variablen und
+Konstanten, die mit einem Operator verknüpft werden, nennt man
+\textbf{Operanden}. Ein Ausdruck kann auch aus einer einzelnen Variablen
+bestehen.
+
+Folgendes Beispiel zeigt einen Ausdruck, der aus einer Variablen
+\texttt{i}, einem Operator \texttt{+} und einem Operanden \texttt{5}
+besteht.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+  \NormalTok{i + }\DecValTok{5}
+\end{Highlighting}
+\end{Shaded}
+
+Das Resultat des Ausdrucks kann wieder in einer Variablen gespeichert
+werden. In folgendem Beispiel wird das Resultat in der Variablen
+\texttt{i} gespeichert. Der vorherige Wert von \texttt{i} wird dadurch
+überschrieben.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+  \NormalTok{i = i + }\DecValTok{5}\NormalTok{;}
+\end{Highlighting}
+\end{Shaded}
+
+Die Reihenfolge, mit der Ausdrücke bearbeitet werden, kann durch die
+Wahl des Operators und durch Klammern beeinflusst werden. Hierfür gelten
+die mathematischen Regeln, wie wir sie in der Schule gelernt haben, also
+„Klammern zuerst, dann Punkt vor Strich``.
+
+\paragraph{Beispiel:}\label{beispiel-5}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+  \DecValTok{5} \NormalTok{* (}\DecValTok{2} \NormalTok{+ }\DecValTok{10}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+Die Klammern erzwingen, dass die Addition vor der Multiplikation
+ausgeführt wird.
+
+\subsection{Weitere Arithmetische
+Operatoren}\label{weitere-arithmetische-operatoren}
+
+Es gibt in Java noch weitere arithmetische Operatoren.
+
+\paragraph{Zuweisungsoperator:}\label{zuweisungsoperator}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{i += }\DecValTok{1}\NormalTok{; \textbackslash{}\textbackslash{}entspricht i = i + }\DecValTok{1}\NormalTok{;}
+\NormalTok{i -= }\DecValTok{1}\NormalTok{; \textbackslash{}\textbackslash{}entspricht i = i - }\DecValTok{1}\NormalTok{;}
+\NormalTok{i *= }\DecValTok{1}\NormalTok{; \textbackslash{}\textbackslash{}entspricht i = i * }\DecValTok{1}\NormalTok{;}
+\NormalTok{i /= }\DecValTok{1}\NormalTok{; \textbackslash{}\textbackslash{}entspricht i = i / }\DecValTok{1}\NormalTok{;}
+\NormalTok{i %= }\DecValTok{1}\NormalTok{; \textbackslash{}\textbackslash{}entspricht i = i % }\DecValTok{1}\NormalTok{;}
+\end{Highlighting}
+\end{Shaded}
+
+Die Zuweisungsoperatoren dienen dazu die Anweisungen kompakter
+darzustellen, da man weniger Zeichen benötigt.
+
+\paragraph{Increment und Decrement
+Operatoren:}\label{increment-und-decrement-operatoren}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{i++; \textbackslash{}\textbackslash{}entspricht i = i + }\DecValTok{1}\NormalTok{;}
+\NormalTok{i--; \textbackslash{}\textbackslash{}entspricht i = i - }\DecValTok{1}\NormalTok{;}
+\end{Highlighting}
+\end{Shaded}
+
+Diese Operatoren sind meistens in sogenannten for-Schleifen anzutreffen,
+wo sie einen Zähler hochzählen (siehe Modul 2) .
+
+\section{Der Datentyp String}\label{der-datentyp-string}
+
+Der Datentyp \textbf{String} unterscheidet sich von den bisher
+thematisierten Datentypen insofern, dass er eine Zusammenfassung von
+mehreren gleichartigen Variablen darstellt. Dieser Datentyp ist auch
+kein primitiver Datentyp mehr, da er mehrere Elemente zusammenfasst. Er
+speichert nämlich alle Buchstaben einzeln in je einer char-Variablen.
+Wie diese Zusammenfassung der einzelnen Buchstaben funktioniert, lernen
+Sie, wenn es um die Objektorientierung geht. Die Deklaration und
+Initialisierung der Variablen funktioniert jedoch wie in 1.4.1 und 1.4.2
+beschreiben.
+
+Bei der Initialisierung von String-Variablen muss der Wert zwischen
+\textbf{doppelten Hochkommata} (``) angegeben werden.
+
+\paragraph{Beispiel:}\label{beispiel-6}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{// Deklaration des Strings vorname}
+\NormalTok{String vorname;}
+
+\CommentTok{// Initialisierung mit dem Wert "Paul"}
+\NormalTok{vorname = }\StringTok{"Paul"}\NormalTok{;}
+\end{Highlighting}
+\end{Shaded}
+
+Da ein String mehrere char-Variablen enthält, kann dem String auch ein
+einzelner char zugewiesen werden.
+
+\paragraph{Beispiel:}\label{beispiel-7}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{String name;}
+\NormalTok{name = 'a';}
+\end{Highlighting}
+\end{Shaded}
+
+Mehrere Strings können mit einem \textbf{Plus} (+) verbunden werden. So
+entsteht aus mehreren Einzelteilen ein neuer Text.
+
+\paragraph{Beispiel:}\label{beispiel-8}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{String text;}
+\NormalTok{text = }\StringTok{"Hallo, "}\NormalTok{+ }\StringTok{"das "} \NormalTok{+ }\StringTok{"sind "} \NormalTok{+ }\StringTok{"mehrere "} \NormalTok{+ }\StringTok{"Wörter."}\NormalTok{;}
+\end{Highlighting}
+\end{Shaded}
+
+\section{Bildschirm- Ein- und
+Ausgabe}\label{bildschirm--ein--und-ausgabe}
+
+Oft möchte man, dass die Benutzerin oder der Benutzer des Programms mit
+dem Programm interagieren kann. Das bedeutet, dass das Programm eine
+Ausgabe macht oder dass die Benutzerin oder der Benutzer etwas eingeben
+kann. Um dies zu realisieren verwenden wir Funktionalitäten, welche von
+Java zur Verfügung gestellt werden.
+
+\subsection{Ausgabe}\label{ausgabe}
+
+Damit die Benutzerin oder der Benutzer auch sieht, was im Programm
+berechnet wurde, kann im Programmcode angegeben werden, dass ein
+bestimmter Text oder der Wert einer Variablen ausgegeben wird.
+
+\paragraph{Beispiel: Ausgabe eines vorgegebenen
+Texts}\label{beispiel-ausgabe-eines-vorgegebenen-texts}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{System.}\FunctionTok{out}\NormalTok{.}\FunctionTok{println}\NormalTok{(}\StringTok{"Das Programm hat geendet."}\NormalTok{);}
+\end{Highlighting}
+\end{Shaded}
+
+Im obigen Beispiel wird der Text „Das Programm hat geendet.''
+ausgegeben. Der Text, der ausgegeben wird, steht zwischen einem Paar von
+Anführungs- und Schlusszeichen (``), die nicht mit ausgegeben werden.
+Man möchte aber nicht immer nur vorgegebenen Text ausgeben, sondern z.B.
+das Resultat einer Berechnung, welches in einer Variablen (z.B.
+\texttt{ganzeZahl}) gespeichert ist.
+
+\paragraph{Beispiel: Ausgabe des Wertes einer
+Variablen}\label{beispiel-ausgabe-des-wertes-einer-variablen}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{System.}\FunctionTok{out}\NormalTok{.}\FunctionTok{println}\NormalTok{(ganzeZahl);}
+\end{Highlighting}
+\end{Shaded}
+
+Wenn man Variablenwerte und Text verbinden möchte, geschieht dies mit
+einem Additions-Zeichen (\texttt{+}).
+
+\paragraph{Beispiel: Ausgabe von Text und
+Variablenwert}\label{beispiel-ausgabe-von-text-und-variablenwert}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{System.}\FunctionTok{out}\NormalTok{.}\FunctionTok{println}\NormalTok{(}\StringTok{"Das Resultat ist:"} \NormalTok{+ ganzeZahl);}
+\end{Highlighting}
+\end{Shaded}
+
+\subsection{Eingabe}\label{eingabe}
+
+Oft möchte man den Wert einer Variablen durch die Benutzerin oder den
+Benutzer eines Programms bestimmen lassen. Eine einfache Möglichkeit ist
+die Eingabe mit der Tastatur über das Konsolenfenster.
+
+Eine Benutzereingabe ist in Java etwas aufwändiger als bei anderen
+Programmiersprachen. Sie beinhaltet folgende zwei Schritte:
+
+\textbf{Paket einbinden:} Mit einer Importanweisung zu Beginn unseres
+Java-Programms muss zunächst die Klasse Scanner des Pakets util
+eingebunden werden:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{import java.util.Scanner;}
+\end{Highlighting}
+\end{Shaded}
+
+\textbf{Werte einlesen:} Mit folgenden zwei Zeilen können wir Werte in
+Form von Zeichenketten (String) vom Konsolenfenster einlesen und einer
+Variablen (z.B. wert) zuweisen:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{Scanner eingabe = }\KeywordTok{new} \NormalTok{Scanner(System.}\FunctionTok{in}\NormalTok{);}
+\NormalTok{String wert = eingabe.}\FunctionTok{next}\NormalTok{();}
+\end{Highlighting}
+\end{Shaded}
+
+Nun weisen wir den eingelesenen Wert unserer Variablen \texttt{zahl} zu.
+Hierfür muss der eingelesene Text noch in einen Integer umgewandelt
+werden:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{Integer.}\FunctionTok{parseInt}\NormalTok{(wert);}
+\end{Highlighting}
+\end{Shaded}
+
+\textbf{Beispiel:} Mit den folgenden Anweisungen übergeben wir eine
+Eingabezahl von der Konsole an die Variable \texttt{x} vom Typ Integer:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\DataTypeTok{int} \NormalTok{x;}
+\NormalTok{Scanner eingabe = }\KeywordTok{new} \NormalTok{Scanner(System.}\FunctionTok{in}\NormalTok{);}
+\NormalTok{String wert = eingabe.}\FunctionTok{next}\NormalTok{();}
+\NormalTok{x = Integer.}\FunctionTok{parseInt}\NormalTok{(wert);}
+\end{Highlighting}
+\end{Shaded}
+
+\subsubsection{Einlesen von Datentypen}\label{einlesen-von-datentypen}
+
+Für das Einlesen von den Standard Datentypen (siehe Tabelle
+\ref{tab:datatypes}) bietet Scanner auch Möglichkeiten, diese direkt
+einzulesen.
+
+\paragraph{Beispiel:}\label{beispiel-9}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\DataTypeTok{int} \NormalTok{ganzeZahl;}
+\DataTypeTok{double} \NormalTok{kommaZahl;}
+\NormalTok{ganzeZahl= eingabe.}\FunctionTok{nextInt}\NormalTok{();}
+\NormalTok{kommaZahl= eingabe.}\FunctionTok{nextDouble}\NormalTok{();}
+\end{Highlighting}
+\end{Shaded}
+
+
+
+\end{document}
+

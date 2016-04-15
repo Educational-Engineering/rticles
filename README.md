@@ -1,76 +1,51 @@
 
 ### Installation
 
-You can install and use **rticles** from CRAN as follows:
+You can install and use **eTutorialsLayout** from CRAN as follows:
+
 
 ```r
-install.packages("rticles", type = "source")
+devtools::install_github("Educational-Engineering/eTutorialsLayout")
 ```
 
-If you wish to install the development version from GitHub you can do this:
-
-```r
-devtools::install_github("rstudio/rticles")
-```
-
-#### Sandbox Version
-
-Prior to submitting **rticles** to CRAN a number of formats that were not passing tests on all platforms were removed from the package (we expect that these formats will be restored eventually once their authors arrange for the tests to pass). If you are an existing user of one of these **rticles** formats you can install the "sandbox" version of the package which retains these formats as follows:
-
-```r
-devtools::install_github("rstudio/rticles", ref = "sandbox")
-```
 
 ### Overview
 
-The **rticles** package provides a suite of custom [R Markdown](http://rmarkdown.rstudio.com) LaTeX formats and templates for varoius formats, including:
-
-- [JSS](http://www.jstatsoft.org/) articles
-
-- [R Journal](http://journal.r-project.org/) articles
-
-- [CTeX](http://ctex.org) documents
-
-- [ACM](http://www.acm.org/) articles
-
-- [ACS](http://pubs.acs.org/) articles
-
-- [Elsevier](https://www.elsevier.com) journal submissions
+The **eTutorialsLayout** package provides a suite of custom [R Markdown](http://rmarkdown.rstudio.com) LaTeX formats and templates for varoius formats, including:
 
 Under the hood, LaTeX templates are used to ensure that documents conform precisely to submission standards. At the same time, composition and formatting can be done using lightweight [markdown](http://rmarkdown.rstudio.com/authoring_basics.html) syntax, and R code and its output can be seamlessly included using [knitr](http://yihui.name/knitr/).
 
-Using **rticles** has some prerequisites which are described below. You can get most of these pre-requisites automatically by installing the latest release of RStudio (instructions for using **rticles** without RStudio are also provided).
+Using **eTutorialsLayout** has some prerequisites which are described below. You can get most of these pre-requisites automatically by installing the latest release of RStudio (instructions for using **eTutorialsLayout** without RStudio are also provided).
 
-### Using rticles from RStudio
+### Using eTutorialsLayout from RStudio
 
-To use **rticles** from RStudio:
+To use **eTutorialsLayout** from RStudio:
 
 1) Install the latest [RStudio](http://www.rstudio.com/products/rstudio/download/).
 
-2) Install the **rticles** package: 
+2) Install the **eTutorialsLayout** package: 
     
-    install.packages("rticles", type = "source")
+    devtools::install_github("Educational-Engineering/eTutorialsLayout")
     
 3) Use the **New R Markdown** dialog to create an article from one of the templates:
 
  ![New R Markdown](http://rmarkdown.rstudio.com/images/new_r_markdown.png)
     
     
-### Using rticles outside of RStudio
+### Using eTutorialsLayout outside of RStudio
 
 1) Install [pandoc](http://johnmacfarlane.net/pandoc/) using the [instructions for your platform](https://github.com/rstudio/rmarkdown/blob/master/PANDOC.md).
 
-2) Install the **rmarkdown** and **rticles** packages:
+2) Install the **rmarkdown** and **eTutorialsLayout** packages:
 
     
     install.packages("rmarkdown")
-    devtools::install_github("rstudio/rticles")
+    devtools::install_github("Educational-Engineering/eTutorialsLayout")
     
     
 3) Use the `rmarkdown::draft` function to create articles:
 
     
-    rmarkdown::draft("MyJSSArticle.Rmd", template = "jss_article", package = "rticles")
-    rmarkdown::draft("MyRJournalArticle", template = "rjournal_article", package = "rticles")
+    rmarkdown::draft("MyJSSArticle.Rmd", template = "et_booklet_de", package = "eTutorialsLayout")
+    rmarkdown::draft("MyRJournalArticle", template = "et_booklet_de", package = "eTutorialsLayout")
     
-
