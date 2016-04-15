@@ -5,7 +5,7 @@ You can install and use **eTutorialsLayout** from CRAN as follows:
 
 
 ```r
-devtools::install_github("Educational-Engineering/eTutorialsLayout")
+devtools::install_github("Educational-Engineering/rticles")
 ```
 
 
@@ -40,12 +40,12 @@ To use **eTutorialsLayout** from RStudio:
 
     
     install.packages("rmarkdown")
-    devtools::install_github("Educational-Engineering/eTutorialsLayout")
+    devtools::install_github("Educational-Engineering/rticles")
     
     
 3) Use the `rmarkdown::draft` function to create articles:
 
     
     rmarkdown::draft("MyJSSArticle.Rmd", template = "et_booklet_de", package = "eTutorialsLayout")
-    rmarkdown::draft("MyRJournalArticle", template = "et_booklet_de", package = "eTutorialsLayout")
+    rmarkdown::draft("MyRJournalArticle", template = "et_booklet_en", package = "eTutorialsLayout")
     
