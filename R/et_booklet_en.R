@@ -14,7 +14,7 @@
 #' }
 #'
 #' @export
-et_booklet_en <- function(..., keep_tex = TRUE) {
+et_booklet_en <- function(..., keep_tex = F) {
 
   inherit_pdf_document(...,
                        template = find_resource("et_booklet_en", "template.tex"),
