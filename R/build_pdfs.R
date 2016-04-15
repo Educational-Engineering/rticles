@@ -5,4 +5,8 @@
 #' @export
 build_pdfs <- function() {
   lapply(list.files(pattern = ".Rmd$", recursive = TRUE), function(f){rmarkdown::render(f, output_dir = "pdf",clean = T)})
+
+  #clean tex files
+  unlink("pdf/*.tex")
+
 }

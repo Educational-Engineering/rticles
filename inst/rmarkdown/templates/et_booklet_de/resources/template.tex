@@ -193,17 +193,18 @@
 \usepackage{enumitem}
 
 
-\providecommand{\Keywords}[1]{%
+\providecommand{\Keywords}{%
 \section*{Begriffe}%
+\begin{minipage}{\textwidth}%
 \hrule%
-\vspace{-3mm}%
 \begin{multicols}{3}%
-\begin{itemize}[leftmargin=0mm]
+\begin{itemize}[leftmargin=0mm]%
 $for(keywords)$\item[] $keywords$ $endfor$
 \end{itemize}%
 \end{multicols}%
 \vspace{-2mm}%
 \hrule%
+\end{minipage}%
 \needspace{.25\textheight}%
 }
 
