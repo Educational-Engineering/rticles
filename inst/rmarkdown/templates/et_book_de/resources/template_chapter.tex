@@ -1,0 +1,54 @@
+\refstepcounter{part}
+\addcontentsline{toc}{part}{\protect\numberline{\thepart}$title.main$
+
+
+\par
+\raisebox{0\height}{\includegraphics[width=0.45\textwidth]{figures/ethlogo-print.png}}%
+\hfill
+\raisebox{0\height}{\includegraphics[width=0.25\textwidth]{figures/Logo.png}
+}%
+\par
+
+\begin{center}
+
+\noindent\rule{\textwidth}{0.4pt}
+
+<% if defined?(localConfig['course']) %>
+\vspace{0.5 cm} {\large \textsf{<%= localConfig['course'] %>}}
+<% end %>
+\vspace{0.5 cm} {\LARGE \textbf{ \textsf{<%= localConfig['title'] %> }}}\\
+\vspace{0.5 cm} {\Large \textsf{<%= localConfig['subtitle'] %>}}
+\noindent\rule{\textwidth}{0.4pt}
+<% if config['lang'] != "ngerman" %>
+\vspace{1 cm}Authors: \\ \vspace{2 mm}<%= localConfig['authors'] %>
+<% else %>
+  	\vspace{1 cm}Autoren: \\ \vspace{2 mm}<%= localConfig['authors'] %> \\
+  	<% end %>
+\end{center}
+
+
+
+<% if defined?(localConfig['keywords']) %>
+<% if localConfig['keywords'].length > 0 %>
+\section*{Begriffe}
+\begin{tabular}{ @{}p{0.45\textwidth} p{0.45\textwidth} @{} }
+\toprule
+<% (0...localConfig['keywords'].length).step(2).each do |i| %>
+	<%= localConfig['keywords'][i] %> & <%= localConfig['keywords'][i+1] %>  \\
+<% end %>
+\bottomrule
+
+\end{tabular}
+
+<% end %>
+<% end %>
+
+<% end %>
+\clearpage
+\begingroup
+\let\clearpage\relax
+\let\cleardoublepage\relax
+\chapter{<%= localConfig['subtitle'] %>}
+\endgroup
+
+<%= latexChapter %>

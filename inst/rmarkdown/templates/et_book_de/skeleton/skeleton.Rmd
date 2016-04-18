@@ -1,0 +1,79 @@
+---
+title:
+  course: Programmieren mit Java
+  main: 'Begleitunterlagen'
+  subtitle: 'Zu dem Online Kurs'
+author:
+- name: FirstName LastName
+- name: Second Author
+keywords:
+- keywords
+- not capitalized
+- Java
+output:
+  pdf_document: eTutorialsLayout::et_book_de
+  keep_latex: true
+  parts: -1
+  html_document:
+    toc: yes
+    toc_depth: 2
+contact:
+  email: et@ethz.ch
+version:
+  date: "`r format(Sys.time(), '%d %B, %Y')`"
+  hash: "`r system('git rev-parse --short HEAD', intern=T)`"
+  number: 1
+---
+
+\chapter{Wie soll dieses Buch verwendet werden?}
+
+Das vorliegende Buch enthält alle Begleitunterlagen zum Onlinekurs **Programmiergrundlagen mit Python und Matlab**. Für den Kurs können Sie sich über eine der folgenden beiden Lehrveranstaltungen registrieren und einschreiben:
+
+- **Grundlagen der Informatik** (252-0852-00L), *www.gdi.ethz.ch*
+- **Einsatz von Informatikmitteln** (252-0839-00L), *www.evim.ethz.ch*
+
+Der Kurs besteht aus folgenden **4 Modulen**:
+
+\begin{table}[!htbp]\centering
+\begin{tabular}{@{}llll@{}}
+\toprule
+ & Titel & Sprache \\
+\midrule
+ 1 & Variablen und Datentypen & Python \\
+ 2 & Kontrollstrukturen und Logik & Python \\
+ 3 & Arrays, Simulieren und Modellieren & Python \\
+ 4 & Matrizenrechnen & Matlab \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+Jedes Modul dauert abhängig von Ihrem Vorwissen 4 bis 8 Arbeitsstunden. Die Materialien in diesem Buch und auf der Webseite begleiten Sie von der Einführung der Begriffe und Konzepte, über deren Verwendung in einfachen Programmier-Beispielen bis hin zur selbstständigen Anwendung der Programmierkonzepte in kleinen Programmier-Projekten.
+
+Jedes Modul ist wie folgt organisiert:
+
+1. **SEE**: In diesem Buch und in der Vorlesung erhalten Sie eine Einführung in die wichtigsten Begriffe und Konzepte der Programmierung.
+2. **TRY**: In diesem Schritt wenden Sie die Konzepte erstmals anhand überschaubarer Programmierbeispielen an. Angeleitet werden Sie dabei von einem elektronischen Tutorials (E.Tutorial).
+3. **DO**: In diesem Schritt setzten Sie selbstständig kleinere Programmier-Projekte um.
+4. **EXPLAIN**: In diesem abschlissenden Schritt diskutieren Sie mit einer Assistenzperson im Computerraum über die Programmier-Projekte aus Phase 3. Dabei versuchen Sie, die neuen Konzepte der Phase 1 anhand Ihrer Lösung aufzuzeigen.
+
+Dieses Buch enthält alle Begleitmaterialien für die Phasen 1 und 3.
+
+
+**Danksagung:**
+
+Wir danken folgenden Personen:
+
+Prof. Dr. Hans Hinterberger und Dr. Barbara Scheuner für das Bereitstellen von Unterlagen und Aufgabenstellungen aus früheren Kursen.
+
+Prof. Dr. Juraj Hromkovic für die finanzielle Unterstützung.
+
+Dr. Hans Joachim Böckenhauer für das Korrekturlesen.
+
+```{r,  results = "asis", echo=FALSE}
+eTutorialsLayout::loadChapter('./chap1.Rmd', chapter=T)
+```
+
+
+```{r,  results = "asis", echo=FALSE}
+eTutorialsLayout::loadChapter('./chap1.Rmd', chapter=F)
+```

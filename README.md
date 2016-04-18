@@ -25,7 +25,7 @@ To use **eTutorialsLayout** from RStudio:
 
 2) Install the **eTutorialsLayout** package: 
     
-    devtools::install_github("Educational-Engineering/eTutorialsLayout")
+    devtools::install_github("Educational-Engineering/rticles")
     
 3) Use the **New R Markdown** dialog to create an article from one of the templates:
 
