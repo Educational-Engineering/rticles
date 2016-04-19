@@ -25,9 +25,19 @@ et_book_de <- function(..., keep_tex = T) {
 #'
 #' @export
 loadChapter <- function(path = NULL,
-                  chapter = F){
+                  copyFigures = T,
+                  displayKeywords = F){
 
   filename <- tools::file_path_as_absolute(path)
+  result <- ""
+  if(copyFigures) {
+    currentfiles <- list.files(path=paste0(dirname(filename), '/blub'), full.names = T, include.dirs = T, recursive = T)
+    newlocation <- tools::file_path_as_absolute("./figures")
+    file.copy(from=currentfiles, to=newlocation,
+              overwrite = F, recursive = FALSE,
+              copy.mode = TRUE)
+  }
+
   # Read in the lines of your file
   lines <- readLines(filename)
   # Find the header portion contained between the --- lines.
@@ -38,13 +48,13 @@ loadChapter <- function(path = NULL,
                   collapse = "\n")
   # parse it as yaml, which returns a list of property values
   metadata <- yaml::yaml.load(header)
-  metadata$content <- paste(
+  metadata$content <- paste0("\n", paste(
     gsub("^#","##",lines[-seq(0,header_line_nums[2]+1)])
-    , collapse = "\n")
+    , collapse = "\n"))
 
-  result <- ""
-  if(chapter){
+  if(displayKeywords){
     result <- paste(
+        result,
         "\\cleardoublepage", #only if chapter
         "\\refstepcounter{part}",
         "\\addcontentsline{toc}{part}{\\protect\\numberline{\\thepart}", metadata$title$main, "}",
