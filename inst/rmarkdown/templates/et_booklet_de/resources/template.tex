@@ -184,6 +184,12 @@
   urlcolor=infoColor
 }
 
+
+% ============ style inline code ===================
+\BeforeBeginEnvironment{verbatim}{\begin{mdframed}[style=code]\vspace{-.5em}\shorthandoff{"}}
+\AfterEndEnvironment{verbatim}{\shorthandon{"}\vspace{-1em}\end{mdframed}\unskip}
+
+
 % ============== E.Tutorial Setings ===============
 
 \providecommand{\tightlist}{%
