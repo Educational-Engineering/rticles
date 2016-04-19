@@ -29,7 +29,6 @@ loadChapter <- function(path = NULL,
                   displayKeywords = F){
 
   filename <- tools::file_path_as_absolute(path)
-  result <- ""
   if(copyFigures) {
     currentfiles <- list.files(path=paste0(dirname(filename), '/figures'), full.names = T, include.dirs = T, recursive = T)
     newlocation <- tools::file_path_as_absolute("./figures")
@@ -52,9 +51,9 @@ loadChapter <- function(path = NULL,
     gsub("^#","##",lines[-seq(0,header_line_nums[2]+1)])
     , collapse = "\n"))
 
+  result <- ""
   if(displayKeywords){
     result <- paste(
-        result,
         "\\cleardoublepage", #only if chapter
         "\\refstepcounter{part}",
         "\\addcontentsline{toc}{part}{\\protect\\numberline{\\thepart}", metadata$title$main, "}",
@@ -94,6 +93,7 @@ loadChapter <- function(path = NULL,
                   "\\endgroup \n\n",
                   metadata$content
                   , collapse = "")
-  return(cat(result))
+
+  cat(knitr::knit_child(text = result, quiet=T))
 }
 
