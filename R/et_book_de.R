@@ -31,7 +31,7 @@ loadChapter <- function(path = NULL,
   filename <- tools::file_path_as_absolute(path)
   result <- ""
   if(copyFigures) {
-    currentfiles <- list.files(path=paste0(dirname(filename), '/blub'), full.names = T, include.dirs = T, recursive = T)
+    currentfiles <- list.files(path=paste0(dirname(filename), '/figures'), full.names = T, include.dirs = T, recursive = T)
     newlocation <- tools::file_path_as_absolute("./figures")
     file.copy(from=currentfiles, to=newlocation,
               overwrite = F, recursive = FALSE,
