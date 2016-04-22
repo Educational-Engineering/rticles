@@ -7,6 +7,8 @@ title:
 author:
 - name: FirstName LastName
 - name: Second Author
+translator:
+- name: Tanslater Number1
 keywords:
 - keywords
 - not capitalized
