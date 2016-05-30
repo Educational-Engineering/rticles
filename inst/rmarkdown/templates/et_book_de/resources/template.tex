@@ -178,14 +178,7 @@
 \newcommand{\VariableTok}[1]{{#1}}
 
 
-% ============ Links ================
-\usepackage{hyperref}
-\hypersetup{%
-  colorlinks,
-  linkcolor=infoColor,
-  citecolor=infoColor,
-  urlcolor=infoColor
-}
+
 
 % ============ style inline code ===================
 \BeforeBeginEnvironment{verbatim}{\begin{mdframed}[style=code]\vspace{-.5em}\shorthandoff{"}}
@@ -285,6 +278,14 @@ $for(author)$$author.name$$sep$ \And $endfor$
 
 
 $preamble$
+% ============ Links ================
+\usepackage{hyperref}
+\hypersetup{%
+  colorlinks,
+  linkcolor=infoColor,
+  citecolor=infoColor,
+  urlcolor=infoColor
+}
 
 \begin{document}
 \frontmatter
