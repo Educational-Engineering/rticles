@@ -70,10 +70,10 @@ Prof. Dr. Juraj Hromkovic für die finanzielle Unterstützung.
 Dr. Hans Joachim Böckenhauer für das Korrekturlesen.
 
 ```{r,  results = "asis", echo=FALSE}
-eTutorialsLayout::loadChapter('./chap1.Rmd', chapter=T)
+eTutorialsLayout::loadChapter('./chap1.Rmd', displayKeywords=T)
 ```
 
 
 ```{r,  results = "asis", echo=FALSE}
-eTutorialsLayout::loadChapter('./chap1.Rmd', chapter=F)
+eTutorialsLayout::loadChapter('./chap1.Rmd', displayKeywords=F)
 ```
