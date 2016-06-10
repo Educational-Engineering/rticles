@@ -3,6 +3,8 @@ title:
   course: Programmieren mit Java
   main: 'Begleitunterlagen'
   subtitle: 'Zu dem Online Kurs'
+book:
+  isbn: 978-3-527-70594-8
 author:
 - name: FirstName LastName
 - name: Second Author

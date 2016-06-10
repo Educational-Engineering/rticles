@@ -201,7 +201,7 @@
 \cehead{}
 \cohead{}
 
-\newpairofpagestyles[scrheadings]{impressum}{\cfoot{\footnotesize  Version: 1, Datum: 10 Juni, 2016, Hash:  107f5d6}}
+\newpairofpagestyles[scrheadings]{impressum}{\cfoot{\footnotesize  Version: 1, Datum: 10 Juni, 2016, Hash:  f29e9a9}}
 
 
 
@@ -324,11 +324,21 @@ FirstName LastName \And Second Author
 \clearpage
 
 
-\begin{center}
 \thispagestyle{impressum}
 \null
 \vfill
 
+\begin{minipage}{0.85\textwidth}
+\begin{flushleft}
+  \textbf{Bibliografische Information der Deutschen Nationalbibliothek}\\
+  Die Deutsche Nationalbibliothek verzeichnet diese Publikation in der Deutschen Nationalbibliografie; detaillierte bibliografische Daten sind im Internet über \href{http://dnb.dnb.de}{http://dnb.dnb.de} abrufbar.
+\end{flushleft}
+\end{minipage}
+
+
+\vspace{0.4cm}
+
+\begin{center}
 Trotz sorgfältiger Arbeit schleichen sich manchmal Fehler ein. Die Autoren sind Ihnen für Anregungen und Hinweise per Email an \href{mailto:et@ethz.ch}{\nolinkurl{et@ethz.ch}} dankbar!\\
 
 \end{center}
@@ -338,14 +348,16 @@ Trotz sorgfältiger Arbeit schleichen sich manchmal Fehler ein. Die Autoren sind
    \href{http://creativecommons.org/licenses/by-nc-nd/4.0/deed.de}{Namensnennung - Nicht kommerziell - Keine Bearbeitungen 4.0 International.} \\
     \end{center}
     \begin{center}
-        \href{http://creativecommons.org/licenses/by-nc-nd/4.0/deed.de}{\includegraphics[scale=0.25]{figures/by-nc-nd_eu.png}}
+        \href{http://creativecommons.org/licenses/by-nc-nd/4.0/deed.de}{\includegraphics[scale=0.2]{figures/by-nc-nd_eu.png}}
     \end{center}
 	\begin{center}
        Um eine Kopie dieser Lizenz zu sehen, besuchen Sie\\
        \href{http://creativecommons.org/licenses/by-nc-nd/4.0/deed.de}{http://creativecommons.org/licenses/by-nc-nd/4.0/deed.de}\\
 	\end{center}
-	Herstellung und Verlag: BoD – Books on Demand, Norderstedt
-\end{center}
+	Herstellung und Verlag: BoD – Books on Demand, Norderstedt\\
+		  \vspace{0.3cm}
+    {ISBN 978-3-527-70594-8}
+  \end{center}
 \end{titlepage}
 \cleardoublepage
 
