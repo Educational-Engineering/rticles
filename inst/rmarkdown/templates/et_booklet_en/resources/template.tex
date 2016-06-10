@@ -116,8 +116,8 @@
     leftline=false,
     bottomline=false,
     roundcorner=10pt,
-    innertopmargin=10pt,
-    innerbottommargin=10pt,
+    innertopmargin=5pt,
+    innerbottommargin=5pt,
     innerrightmargin=10pt,
     innerleftmargin=10pt,
     nobreak=true,
@@ -195,8 +195,8 @@
 }
 
 % ============ style inline code ===================
-\BeforeBeginEnvironment{verbatim}{\begin{mdframed}[style=code]\vspace{-.5em}}
-\AfterEndEnvironment{verbatim}{\vspace{-1em}\end{mdframed}\unskip}
+\BeforeBeginEnvironment{verbatim}{\begin{mdframed}[style=code]}
+\AfterEndEnvironment{verbatim}{\end{mdframed}\unskip}
 \begingroup\lccode`~=`"
 \lowercase{\endgroup
   \xapptocmd\ttfamily{\let~"}{}{}

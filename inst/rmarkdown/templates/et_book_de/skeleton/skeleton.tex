@@ -115,8 +115,8 @@
     leftline=false,
     bottomline=false,
     roundcorner=10pt,
-    innertopmargin=10pt,
-    innerbottommargin=10pt,
+    innertopmargin=5pt,
+    innerbottommargin=5pt,
     innerrightmargin=10pt,
     innerleftmargin=10pt,
     nobreak=true,
@@ -181,8 +181,8 @@
 
 
 % ============ style inline code ===================
-\BeforeBeginEnvironment{verbatim}{\begin{mdframed}[style=code]\vspace{-.5em}\shorthandoff{"}}
-\AfterEndEnvironment{verbatim}{\shorthandon{"}\vspace{-1em}\end{mdframed}\unskip}
+\BeforeBeginEnvironment{verbatim}{\begin{mdframed}[style=code]\shorthandoff{"}}
+\AfterEndEnvironment{verbatim}{\shorthandon{"}\end{mdframed}\unskip}
 \begingroup\lccode`~=`"
 \lowercase{\endgroup
   \xapptocmd\ttfamily{\let~"}{}{}
@@ -201,7 +201,7 @@
 \cehead{}
 \cohead{}
 
-\newpairofpagestyles[scrheadings]{impressum}{\cfoot{\footnotesize  Version: 1, Datum: 07 Juni, 2016, Hash:  2533ce3}}
+\newpairofpagestyles[scrheadings]{impressum}{\cfoot{\footnotesize  Version: 1, Datum: 10 Juni, 2016, Hash:  107f5d6}}
 
 
 
@@ -355,6 +355,34 @@ Trotz sorgfältiger Arbeit schleichen sich manchmal Fehler ein. Die Autoren sind
 \mainmatter
 
 \chapter{Wie soll dieses Buch verwendet werden?}
+
+\begin{verbatim}
+For x = 1 To 3
+  For y = 1 To 3
+    Cells(x,y)
+  Next y
+Next x
+\end{verbatim}
+
+\begin{info}
+\textbf{Einen Zellbereich bearbeiten}
+
+Möchte man den Zellbereich A1 bis C3 bearbeiten, können zwei ineinander
+verschachtelte Schleifen eingesetzt werden:
+
+\begin{verbatim}
+For x = 1 To 3
+  For y = 1 To 3
+    Cells(x,y)
+  Next y
+Next x
+\end{verbatim}
+
+\texttt{Cells} enthält als Zeilen- und Spaltenwerte die beiden
+Laufvariablen. Dadurch werden sämtliche Kombinationen erzeugt:
+
+\texttt{Cells(1,1)}, \texttt{Cells(1,2)}, \ldots{}, \texttt{Cells(3,3)}.
+\end{info}
 
 Das vorliegende Buch enthält alle Begleitunterlagen zum Onlinekurs
 \textbf{Programmiergrundlagen mit Python und Matlab}. Für den Kurs
