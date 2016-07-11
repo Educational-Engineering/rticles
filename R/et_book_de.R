@@ -47,9 +47,23 @@ loadChapter <- function(path = NULL,
                   collapse = "\n")
   # parse it as yaml, which returns a list of property values
   metadata <- yaml::yaml.load(header)
-  metadata$content <- paste0("\n", paste(
-    gsub("^#","##",lines[-seq(0,header_line_nums[2]+1)])
-    , collapse = "\n"))
+  #metadata$content <- paste0("\n", paste(
+    #gsub("^#","##",lines[-seq(0,header_line_nums[2]+1)])
+    #, collapse = "\n"))
+
+  metadata$content <- "\n"
+  isCode <- FALSE
+  for (l in lines[-seq(0,header_line_nums[2]+1)]) {
+    if (grepl("^~~~", l)) {
+      isCode <- !isCode
+    }
+    if (!isCode) {
+      metadata$content <- paste0(metadata$content, gsub("^#","##", l), "\n")
+    } else {
+      metadata$content <- paste0(metadata$content, l, "\n")
+    }
+  }
+
 
   result <- ""
   if(displayKeywords){
@@ -91,7 +105,7 @@ loadChapter <- function(path = NULL,
                   "\\let\\cleardoublepage\\relax",
                   "\\chapter{", metadata$title$subtitle,"}",
                   "\\endgroup \n\n",
-                  metadata$content
+                  metadata$content[1]
                   , collapse = "")
 
   cat(knitr::knit_child(text = result, quiet=T))

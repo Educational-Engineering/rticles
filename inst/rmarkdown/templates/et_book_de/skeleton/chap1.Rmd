@@ -227,6 +227,7 @@ Bei einer Zuweisung handelt es sich also immer um einen schreibenden Zugriff auf
 Ein Wert vom Typ `int` kann einer Variablen vom Typ `double` zugewiesen werden:
 
 ~~~{.java}
+# rear
 // Variable ganzeZahl vom Typ Integer
 int ganzeZahl;
 // Variable kommaZahl vom Typ Double
