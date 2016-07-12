@@ -29,12 +29,9 @@ version:
 
 \chapter{Wie soll dieses Buch verwendet werden?}
 
-~~~
-For x = 1 To 3
-  For y = 1 To 3
-    Cells(x,y)
-  Next y
-Next x
+~~~{.python}
+if blub:
+  print("blub")
 ~~~
 
 ```{block, type='info'}
