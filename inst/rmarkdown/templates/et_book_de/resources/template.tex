@@ -231,40 +231,6 @@
 %center chapter
 \addtokomafont{chapter}{\centering}
 
-%make site count dividable by 4
-\usepackage{xparse}
-\usepackage{refcount,lastpage,etoolbox}
-\makeatletter
-\patchcmd\mainmatter{\cleardoublepage}
-  {%
-   \clearpage\edef\@currentlabel{\number\numexpr\arabic{page}\ifodd\arabic{page}+1\fi\relax}%
-   \label{LastFrontmatterPage}%
-   \cleardoublepage
-  }{}{}
-\makeatother
-
-\ExplSyntaxOn
-\cs_new:Npn \egreg_int_coremainder:nn #1 #2
- {
-  \int_mod:nn { #2 - \int_mod:nn { #1 } { #2 } } { #2 }
- }
-\NewDocumentCommand{\checkmultipleoffour} { O{0} }
- {
-  \prg_replicate:nn
-   {
-    \egreg_int_coremainder:nn { #1 + \getrefnumber{LastFrontmatterPage} + \getpagerefnumber{LastPage} } { 4 }
-   }
-   { \thispagestyle{empty}\null\clearpage }
- }
-\ExplSyntaxOff
-\AtEndDocument{\checkmultipleoffour}
-
-
-
-
-
-
-
 \providecommand{\tightlist}{%
   \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
 
@@ -378,22 +344,6 @@ Trotz sorgfältiger Arbeit schleichen sich manchmal Fehler ein. Die Autoren sind
 
 $body$
 
-$if(natbib)$
-$if(bibliography)$
-$if(biblio-title)$
-$if(book-class)$
-\renewcommand\bibname{$biblio-title$}
-$else$
-\renewcommand\refname{$biblio-title$}
-$endif$
-$endif$
-\bibliography{$for(bibliography)$$bibliography$$sep$,$endfor$}
-$endif$
-$endif$
-
-$if(biblatex)$
-\printbibliography$if(biblio-title)$[title=$biblio-title$]$endif$
-$endif$
 
 \end{document}
 
