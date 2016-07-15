@@ -300,17 +300,7 @@ $endif$
 \null
 \vfill
 
-$if(book.isbn)$
-\begin{minipage}{0.85\textwidth}
-\begin{flushleft}
-  \textbf{Bibliografische Information der Deutschen Nationalbibliothek}\\
-  Die Deutsche Nationalbibliothek verzeichnet diese Publikation in der Deutschen Nationalbibliografie; detaillierte bibliografische Daten sind im Internet über \href{http://dnb.dnb.de}{http://dnb.dnb.de} abrufbar.
-\end{flushleft}
-\end{minipage}
 
-
-\vspace{0.4cm}
-$endif$
 
 \begin{center}
 Trotz sorgfältiger Arbeit schleichen sich manchmal Fehler ein. Die Autoren sind Ihnen für Anregungen und Hinweise per Email an $contact.email$ dankbar!\\
@@ -331,8 +321,17 @@ Trotz sorgfältiger Arbeit schleichen sich manchmal Fehler ein. Die Autoren sind
 	Herstellung und Verlag: BoD – Books on Demand, Norderstedt\\
 	$if(book.isbn)$
 	  \vspace{0.3cm}
-    {ISBN $book.isbn$}
-  $endif$
+    {ISBN $book.isbn$}\\
+	  \vspace{0.3cm}
+\begin{minipage}{0.73\textwidth}
+\begin{flushleft}
+\begin{small}
+  Bibliografische Information der Deutschen Nationalbibliothek\\
+  Die Deutsche Nationalbibliothek verzeichnet diese Publikation in der Deutschen Nationalbibliografie; detaillierte bibliografische Daten sind im Internet über \href{http://dnb.dnb.de}{http://dnb.dnb.de} abrufbar.
+\end{small}
+\end{flushleft}
+\end{minipage}
+$endif$
 \end{center}
 \end{titlepage}
 \cleardoublepage
