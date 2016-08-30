@@ -19,6 +19,7 @@
 \xpretocmd{\paragraph}{\needspace{1in}}{}{}
 \xpretocmd{\subsubsection}{\needspace{1in}}{}{}
 
+
 % ============ Mathematik ================
 \usepackage{amsmath}
 \usepackage{amsfonts}
@@ -229,7 +230,7 @@
 \renewcommand*\thetable{\thepart.\arabic{table}}
 \renewcommand*\thefigure{\thepart.\arabic{figure}}
 %center chapter
-\renewcommand*\raggedchapter{\centering}
+\addtokomafont{chapter}{\centering}
 
 \providecommand{\tightlist}{%
   \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}

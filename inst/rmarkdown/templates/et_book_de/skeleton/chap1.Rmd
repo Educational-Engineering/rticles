@@ -2,7 +2,7 @@
 title:
   course: A Capitalized Title
   financing: Wir danken bla
-  main: 'Module 0'
+  main: 'A Capitalized Title: Something about a Package der sehr lang ist'
   subtitle: "Theorieteil"
 author:
 - name: FirstName LastName

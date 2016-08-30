@@ -1,8 +1,7 @@
 ---
 title:
   course: A Capitalized Title
-  financing: Wir danken bla
-  main: 'A Capitalized Title: Something about a Package'
+  main: 'A Capitalized Title: Something about a Package der sehr lang ist'
   subtitle: 'A Capitalized Title: Something about a Package foo'
 author:
 - name: FirstName LastName

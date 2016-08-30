@@ -18,6 +18,8 @@
 \usepackage{xpatch}
 \xpretocmd{\paragraph}{\needspace{1in}}{}{}
 \xpretocmd{\subsubsection}{\needspace{1in}}{}{}
+\usepackage{setspace}
+
 
 % ============ Mathematik ================
 \usepackage{amsmath}
@@ -203,7 +205,7 @@
 \cehead{}
 \cohead{}
 
-\newpairofpagestyles[scrheadings]{impressum}{\cfoot{\footnotesize  Version: 1, Datum: 12 Juli, 2016, Hash:  a5e35a1}}
+\newpairofpagestyles[scrheadings]{impressum}{\cfoot{\footnotesize  Version: 1, Datum: 30 August, 2016, Hash:  7d27443}}
 
 
 
@@ -230,40 +232,6 @@
 \renewcommand*\thefigure{\thepart.\arabic{figure}}
 %center chapter
 \addtokomafont{chapter}{\centering}
-
-%make site count dividable by 4
-\usepackage{xparse}
-\usepackage{refcount,lastpage,etoolbox}
-\makeatletter
-\patchcmd\mainmatter{\cleardoublepage}
-  {%
-   \clearpage\edef\@currentlabel{\number\numexpr\arabic{page}\ifodd\arabic{page}+1\fi\relax}%
-   \label{LastFrontmatterPage}%
-   \cleardoublepage
-  }{}{}
-\makeatother
-
-\ExplSyntaxOn
-\cs_new:Npn \egreg_int_coremainder:nn #1 #2
- {
-  \int_mod:nn { #2 - \int_mod:nn { #1 } { #2 } } { #2 }
- }
-\NewDocumentCommand{\checkmultipleoffour} { O{0} }
- {
-  \prg_replicate:nn
-   {
-    \egreg_int_coremainder:nn { #1 + \getrefnumber{LastFrontmatterPage} + \getpagerefnumber{LastPage} } { 4 }
-   }
-   { \thispagestyle{empty}\null\clearpage }
- }
-\ExplSyntaxOff
-\AtEndDocument{\checkmultipleoffour}
-
-
-
-
-
-
 
 \providecommand{\tightlist}{%
   \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
@@ -330,15 +298,7 @@ FirstName LastName \And Second Author
 \null
 \vfill
 
-\begin{minipage}{0.85\textwidth}
-\begin{flushleft}
-  \textbf{Bibliografische Information der Deutschen Nationalbibliothek}\\
-  Die Deutsche Nationalbibliothek verzeichnet diese Publikation in der Deutschen Nationalbibliografie; detaillierte bibliografische Daten sind im Internet über \href{http://dnb.dnb.de}{http://dnb.dnb.de} abrufbar.
-\end{flushleft}
-\end{minipage}
 
-
-\vspace{0.4cm}
 
 \begin{center}
 Trotz sorgfältiger Arbeit schleichen sich manchmal Fehler ein. Die Autoren sind Ihnen für Anregungen und Hinweise per Email an \href{mailto:et@ethz.ch}{\nolinkurl{et@ethz.ch}} dankbar!\\
@@ -358,8 +318,17 @@ Trotz sorgfältiger Arbeit schleichen sich manchmal Fehler ein. Die Autoren sind
 	\end{center}
 	Herstellung und Verlag: BoD – Books on Demand, Norderstedt\\
 		  \vspace{0.3cm}
-    {ISBN 978-3-527-70594-8}
-  \end{center}
+    {ISBN 978-3-527-70594-8}\\
+	  \vspace{0.3cm}
+\begin{minipage}{0.73\textwidth}
+\begin{flushleft}
+\begin{small}
+  Bibliografische Information der Deutschen Nationalbibliothek\\
+  Die Deutsche Nationalbibliothek verzeichnet diese Publikation in der Deutschen Nationalbibliografie; detaillierte bibliografische Daten sind im Internet über \href{http://dnb.dnb.de}{http://dnb.dnb.de} abrufbar.
+\end{small}
+\end{flushleft}
+\end{minipage}
+\end{center}
 \end{titlepage}
 \cleardoublepage
 
@@ -470,12 +439,12 @@ Prof.~Dr.~Juraj Hromkovic für die finanzielle Unterstützung.
 Dr.~Hans Joachim Böckenhauer für das Korrekturlesen.
 
 \cleardoublepage \refstepcounter{part}
-\addcontentsline{toc}{part}{\protect\numberline{\thepart} Module 0 }
+\addcontentsline{toc}{part}{\protect\numberline{\thepart} A Capitalized Title: Something about a Package der sehr lang ist }
 \par \raisebox{0\height}{\includegraphics[width=0.25\textwidth]{figures/Logo.png}}
 \hfill \raisebox{10pt}{\includegraphics[width=0.25\textwidth]{figures/teachITLogo.png} }
 \par 
 
-\begin{center} \noindent\rule{\textwidth}{0.4pt}\\ \vspace{0.5 cm} {\large \textsf{ A Capitalized Title }}\\ \vspace{0.5 cm} {\LARGE \textbf{ \textsf{ Module 0  }}}\\ \vspace{0.5 cm} {\Large \textsf{ Theorieteil }}\\ \noindent\rule{\textwidth}{0.4pt}\\ \vspace{1 cm}Autoren: \\ \vspace{2 mm} FirstName LastName, Second Author \\ \end{center}
+\begin{center} \noindent\rule{\textwidth}{0.4pt}\\ \vspace{0.5 cm} {\large \textsf{ A Capitalized Title }\par} \vspace{0.5 cm} {\LARGE \textbf{\textsf{ A Capitalized Title: Something about a Package der sehr lang ist  }}\par} \vspace{0.5 cm} {\Large \textsf{ Theorieteil }\par} \noindent\rule{\textwidth}{0.4pt}\\ \vspace{1 cm}Autoren: \\ \vspace{2 mm} FirstName LastName, Second Author \\ \end{center}
 
 \section*{Begriffe}
 
@@ -1766,7 +1735,6 @@ einzulesen.
 \NormalTok{kommaZahl= eingabe.}\FunctionTok{nextDouble}\NormalTok{();}
 \end{Highlighting}
 \end{Shaded}
-
 
 
 \end{document}
