@@ -217,9 +217,19 @@
 
 %\addto\captionsngerman{\renewcommand{\partname}{}} % remove part name
 
+% add remove from reset to remove counter from beeing resetted
+\def\@removefromreset#1#2{\let\@tempb\@elt
+   \def\@tempa#1{@&#1}\expandafter\let\csname @*#1*\endcsname\@tempa
+   \def\@elt##1{\expandafter\ifx\csname @*##1*\endcsname\@tempa\else
+         \noexpand\@elt{##1}\fi}%
+   \expandafter\edef\csname cl@#2\endcsname{\csname cl@#2\endcsname}%
+   \let\@elt\@tempb
+   \expandafter\let\csname @*#1*\endcsname\@undefined}
+
 %reset counter after each part
 \makeatletter
 \@addtoreset{section}{part}
+\@removefromreset{section}{chapter}
 \makeatother
 \renewcommand\thepart{\arabic{part}}
 \setcounter{part}{$output.parts$}

@@ -18,7 +18,6 @@
 \usepackage{xpatch}
 \xpretocmd{\paragraph}{\needspace{1in}}{}{}
 \xpretocmd{\subsubsection}{\needspace{1in}}{}{}
-\usepackage{setspace}
 
 
 % ============ Mathematik ================
@@ -205,7 +204,7 @@
 \cehead{}
 \cohead{}
 
-\newpairofpagestyles[scrheadings]{impressum}{\cfoot{\footnotesize  Version: 1, Datum: 30 August, 2016, Hash:  7d27443}}
+\newpairofpagestyles[scrheadings]{impressum}{\cfoot{\footnotesize  Version: 1, Datum: 09 Mai, 2017, Hash:  ee69a11}}
 
 
 
@@ -218,9 +217,19 @@
 
 %\addto\captionsngerman{\renewcommand{\partname}{}} % remove part name
 
+% add remove from reset to remove counter from beeing resetted
+\def\@removefromreset#1#2{\let\@tempb\@elt
+   \def\@tempa#1{@&#1}\expandafter\let\csname @*#1*\endcsname\@tempa
+   \def\@elt##1{\expandafter\ifx\csname @*##1*\endcsname\@tempa\else
+         \noexpand\@elt{##1}\fi}%
+   \expandafter\edef\csname cl@#2\endcsname{\csname cl@#2\endcsname}%
+   \let\@elt\@tempb
+   \expandafter\let\csname @*#1*\endcsname\@undefined}
+
 %reset counter after each part
 \makeatletter
 \@addtoreset{section}{part}
+\@removefromreset{section}{chapter}
 \makeatother
 \renewcommand\thepart{\arabic{part}}
 \setcounter{part}{-1}
@@ -444,15 +453,15 @@ Dr.~Hans Joachim Böckenhauer für das Korrekturlesen.
 \hfill \raisebox{10pt}{\includegraphics[width=0.25\textwidth]{figures/teachITLogo.png} }
 \par 
 
-\begin{center} \noindent\rule{\textwidth}{0.4pt}\\ \vspace{0.5 cm} {\large \textsf{ A Capitalized Title }\par} \vspace{0.5 cm} {\LARGE \textbf{\textsf{ A Capitalized Title: Something about a Package der sehr lang ist  }}\par} \vspace{0.5 cm} {\Large \textsf{ Theorieteil }\par} \noindent\rule{\textwidth}{0.4pt}\\ \vspace{1 cm}Autoren: \\ \vspace{2 mm} FirstName LastName, Second Author \\ \end{center}
+\begin{center} \noindent\rule{\textwidth}{0.4pt}\\ \vspace{0.5 cm} {\large \textsf{ A Capitalized Title }}\\ \vspace{0.5 cm} {\LARGE \textbf{ \textsf{ A Capitalized Title: Something about a Package der sehr lang ist  }}}\\ \vspace{0.5 cm} {\Large \textsf{ A Capitalized Title: Something about a Package foo }}\\ \noindent\rule{\textwidth}{0.4pt}\\ \vspace{1 cm}Autoren: \\ \vspace{2 mm} FirstName LastName, Second Author \\ \end{center}
 
 \section*{Begriffe}
 
 \begin{minipage}{\textwidth} \hrule \begin{multicols}{2} \begin{itemize}[leftmargin=0mm] \item[] keywords \item[] not capitalized \item[] Java \end{itemize} \end{multicols} \vspace{-2mm} \hrule \end{minipage}
 
-\clearpage \begingroup \let\clearpage\relax \let\cleardoublepage\relax \chapter{ Theorieteil } \endgroup 
+\clearpage \begingroup \let\clearpage\relax \let\cleardoublepage\relax \chapter{ A Capitalized Title: Something about a Package foo } \endgroup 
 
-\section{Modulübersicht Test 2}\label{modulubersicht-test-2}
+\section{Modulübersicht}\label{modulubersicht}
 
 Die beiden Konzepte Variablen und Datentypen sind für jede
 Programmierung grundlegend. Bei \textbf{Variablen} handelt es sich um
@@ -589,6 +598,186 @@ Dez & Zeichen & Bedeutung\\
 \end{table}
 
 \section{Datentypen}\label{datentypen}
+
+Der \textbf{Datentyp} gibt an, welche Daten in einem Programm
+gespeichert und bearbeitet werden können. Programmiersprachen besitzen
+vordefinierte Datentypen, die sich in der Art der Interpretation der
+gespeicherten Daten und in der Grösse unterscheiden.
+
+\begin{itemize}
+\tightlist
+\item
+  Typ für Zahlenwerte
+\item
+  Typ für Zeichenwerte
+\item
+  Typ für Wahrheitswerte (Boolsche Werte) (siehe Modul 2)
+\end{itemize}
+
+Tabelle \ref{tab:datatypes} gibt einen Überblick über die wichtigsten
+Datentypen, die in vielen Programmiersprachen vorkommen.
+
+\begin{table}[!htbp]\centering 
+\begin{tabular}{@{}llll@{}}     
+\toprule
+ Typ & Beschreibung & Grösse & Wertebereich \\
+ & & in Bit & \\
+\midrule
+ boolean & Boolscher Wert & 1 & true oder false \\
+ char & Zeichen & 16 & Unicode-Zeichen \\
+ byte & Ganzzahl & 8 & $-128 \ldots 127 \;(-2^7 \ldots +2^{7}-1)$ \\
+ short & & 16 & $-32'768 \ldots  32'767 \;(-2^{15} \ldots +2^{15}-1)$ \\
+ int & & 32 & $-2'147'483'648 \ldots2'147'483'647 \;(-2^{31} \ldots +2^{31}-1)$ \\
+ long & & 64 & $-9'223'372'036'854'775'808\ldots$ \\
+ & & &  $9'223'372'036'854'775'807 \; (-2^{63} \ldots +2^{63}-1)$ \\
+ float & Gleitkommazahl & 32 & $+/- 3.40282347 \times 10^{38}$\\
+ double & & 64 & $+/- 1.79769313486231569 \times 10^{308}$ \\
+\bottomrule
+
+\end{tabular}
+\caption{Die wichtigsten Datentypen in Java}
+\label{tab:datatypes}
+\end{table}
+
+\clearpage \begingroup \let\clearpage\relax \let\cleardoublepage\relax \chapter{ Theorieteil } \endgroup 
+
+\section{Modulübersicht Test 2}\label{modulubersicht-test-2}
+
+Die beiden Konzepte Variablen und Datentypen sind für jede
+Programmierung grundlegend. Bei \textbf{Variablen} handelt es sich um
+Speicherbereiche, in denen Werte gespeichert werden können und der
+\textbf{Datentyp} gibt an, welche Werte erlaubt sind (z.B. nur
+Ganzzahlen). In einem Programm werden Daten verarbeitet, die sich in
+ihrer Art unterscheiden, z.B. Zeichen, Zahlen oder logische Daten.
+Digitale Daten werden immer durch Ziffern dargestellt. Daher auch der
+Name, \emph{digit} bedeutet Ziffer.
+
+\section{Darstellung von Zahlen und Zeichen im
+Computer}\label{darstellung-von-zahlen-und-zeichen-im-computer-1}
+
+Um die Darstellung von Zeichen, Zahlen und Texten im Computer zu
+verstehen, muss man das \textbf{binäre System} verstehen.
+
+\subsection{Binäres System}\label{binares-system-1}
+
+Alle Rechner stellen Information im binären System dar. Dieses kennt nur
+zwei Ziffern, nämlich 0 und 1 (im Gegensatz zum Dezimalsystem mit den
+Ziffern 0 bis 9). Eine solche Ziffer wird als \textbf{Bit} bezeichnet
+(Abkürzung für \emph{Binary Digit}, übersetzt „Binäre Ziffer``). Ein Bit
+stellt den kleinsten speicherbaren Wert in einem Computer dar. Jeweils 8
+Bits werden zu einem \textbf{Byte} zusammengefasst. Ein Byte kann somit
+2\textsuperscript{8} = 256 verschiedene Sequenzen von je 8 Bit
+speichern.
+
+\subsection{Darstellung von Zahlen im binären
+System}\label{darstellung-von-zahlen-im-binaren-system-1}
+
+Betrachten wir die Zahl 91, die binär mit 8 Bit als 01011011 dargestellt
+wird (siehe Tabelle \ref{tab:binaryConversation}). Wir reden deswegen in
+diesem Zusammenhang von der \textbf{Binärdarstellung} von 91 (und nicht
+von der Dezimaldarstellung, die für uns lesefreundlicher ist).
+
+\begin{table}[!htpb]
+\begin{tabular}{|l|p{.8cm}|p{.8cm}|p{.8cm}|p{.8cm}|p{.7cm}|p{.7cm}|p{.7cm}|p{.7cm}|p{.8cm}}
+\cline{1-9} \textbf{Bit} & 8 & 7 & 6 & 5 & 4 & 3 & 3 & 1 &\\
+\cline{1-9} \textbf{Binärwert} & 0 & 1 & 0 & 1 & 1 & 0 & 1 & 1 &\\
+\cline{1-9} \textbf{Wertigkeit} & $2^7=128$ & $2^6=64$ & $2^5=32$ & $2^4=16$ & $2^3=8$ & $2^2=4$ & $2^1=2$ & $2^0=1$ &\\
+\hline \textbf{Dezimalwert} & 0 & 64 & 0 & 16 & 8 & 0 & 2 & 1 & \multicolumn{1}{ p{.8cm}| }{= 91} \\
+\hline
+\end{tabular}
+\caption{Binäre Darstellung der Dezimalzahl 91. Details siehe Text.}
+\label{tab:binaryConversation}
+\end{table}
+
+Eine 8-Bit-Zahl, wie in unserem Beispiel, kann Werte zwischen 00000000
+(0 im Dezimalsystem) und 11111111 (255 im Dezimalsystem) speichern. Für
+die Umrechnung vom Binär- in den Dezimalwert multiplizieren wir für
+jedes Bit den Binärwert mit der Wertigkeit des Bits und summieren diese
+auf. Im binären System können wir mit 8 Bit nur die ganzen Zahlen 0 bis
+255 darstellen. Ist die Zahl, die wir darstellen wollen, grösser, muss
+auch ein grösserer Speicherbereich bereitgestellt werden.
+
+\subsection{Darstellung von Zeichen im binären
+System}\label{darstellung-von-zeichen-im-binaren-system-1}
+
+Für die Darstellung von Zeichen im Computer wurde der so genannte
+\textbf{ASCII-Code} entwickelt. ASCII steht für \emph{American Standard
+Code for Information Interchange}, was übersetzt so viel heisst wie
+Amerikanische Standardcodierung für den Datenaustausch. Mit Hilfe des
+7-Bit-ASCII-Codes können 128 verschiedene Zeichen (2\textsuperscript{7})
+dargestellt werden oder umgekehrt wird jedem Zeichen ein Bitmuster aus 7
+Bit zugeordnet (siehe Tabelle \ref{tab:ascii}). Die Zeichen entsprechen
+weitgehend einer Computertastatur. Der ASCII-Code wurde später auf 8 Bit
+erweitert, was die Darstellung von 256 Zeichen (2\textsuperscript{8})
+erlaubt.
+
+\begin{table}[!htbp]\centering
+\ra{1.1}
+\begin{tabular}{@{}llcllcllcll@{}}
+\toprule
+\multicolumn{2}{c}{0-31} & & \multicolumn{2}{c}{31-63} & &
+\multicolumn{2}{c}{64-95} & & \multicolumn{2}{c}{96-127}\\
+\cmidrule{1-2} \cmidrule{4-5} \cmidrule{7-8} \cmidrule{10-11}
+Dez & Zeichen & & Dez  & Zeichen & & Dez & Zeichen & & Dez  & Zeichen\\
+\midrule
+0  & NUL & & 32 &  SP & & 64 & @ & & 96  & ` \\
+1  & SOH & & 33 &  !  & & 65 & A & & 97  & a \\
+2  & STX & & 34 &  "' & & 66 & B & & 98  & b \\
+3  & ETX & & 35 &  \# & & 67 & C & & 99  & c \\
+4  & EOT & & 36 &  \$ & & 68 & D & & 100 & d \\
+5  & ENQ & & 37 &  \% & & 69 & E & & 101 & e \\
+6  & ACK & & 38 &  \& & & 70 & F & & 102 & f \\
+7  & BEL & & 39 &  '  & & 71 & G & & 103 & g \\
+8  & BS  & & 40 &  (  & & 72 & H & & 104 & h \\
+9  & HT  & & 41 &  )  & & 73 & I & & 105 & i \\
+10 & LF  & & 42 &  *  & & 74 & J & & 106 & j \\
+11 & VT  & & 43 &  +  & & 75 & K & & 107 & k \\
+12 & FF  & & 44 &  ,  & & 76 & L & & 108 & l \\
+13 & CR  & & 45 &  -  & & 77 & M & & 109 & m \\
+14 & SO  & & 46 &  .  & & 78 & N & & 110 & n \\
+15 & SI  & & 47 &  /  & & 79 & O & & 111 & o \\
+16 & DLE & & 48 &  0  & & 80 & P & & 112 & p \\
+17 & DC1 & & 49 &  1  & & 81 & Q & & 113 & q \\
+18 & DC2 & & 50 &  2  & & 82 & R & & 114 & r \\
+19 & DC3 & & 51 &  3  & & 83 & S & & 115 & s \\
+20 & DC4 & & 52 &  4  & & 84 & T & & 116 & t \\
+21 & NAK & & 53 &  5  & & 85 & U & & 117 & u \\
+22 & SYN & & 54 &  6  & & 86 & V & & 118 & v \\
+23 & ETB & & 55 &  7  & & 87 & W & & 119 & w \\
+24 & CAN & & 56 &  8  & & 88 & X & & 120 & x \\
+25 & EM  & & 57 &  9  & & 89 & Y & & 121 & y \\
+26 & SUB & & 58 &  :  & & 90 & Z & & 122 & z \\
+27 & ESC & & 59 &  ;  & & 91 & [ & & 123 & \{\\
+28 & FS  & & 60 &  <  & & 92 & $\backslash$ & & 124 & $\mid$\\
+29 & GS  & & 61 &  =  & & 93 & ]    & & 125 & \}  \\
+30 & RS  & & 62 &  >  & & 94 & \^{} & & 126 & \textasciitilde \\
+31 & US  & & 63 &  ?  & & 95 & \_   & & 127 & DEL \\
+\bottomrule
+\end{tabular}
+\caption {ASCII-Tabelle}
+\label{tab:ascii}
+\end{table}
+
+Die ASCII-Tabelle enthält auch nicht darstellbare Zeichen (wie etwa ein
+Zeichen, das einen Zeilenumbruch repräsentiert). Die wichtigsten sind in
+Tabelle \ref{tab:asciiHidden} dargestellt:
+
+\begin{table}[!htbp]\centering
+\begin{tabular}{lll}
+\toprule
+Dez & Zeichen & Bedeutung\\
+\midrule
+8   & BS & Backspace. Linkes Zeichen löschen\\
+10  & NL & New Line. Neue Zeile beginnen\\
+32  & SP & Space. Leerzeichen \\
+127 & DEL & Delete. Rechtes Zeichen löschen \\
+\bottomrule
+\end{tabular}
+\label{tab:asciiHidden}
+\caption{Nicht darstellbare Zeichen der ASCII-Tabelle}
+\end{table}
+
+\section{Datentypen}\label{datentypen-1}
 
 Der \textbf{Datentyp} gibt an, welche Daten in einem Programm
 gespeichert und bearbeitet werden können. Programmiersprachen besitzen
@@ -1093,9 +1282,21 @@ einzulesen.
 \end{Highlighting}
 \end{Shaded}
 
-\clearpage \begingroup \let\clearpage\relax \let\cleardoublepage\relax \chapter{ Theorieteil } \endgroup 
+\cleardoublepage \refstepcounter{part}
+\addcontentsline{toc}{part}{\protect\numberline{\thepart} A Capitalized Title: Something about a Package der sehr lang ist }
+\par \raisebox{0\height}{\includegraphics[width=0.25\textwidth]{figures/Logo.png}}
+\hfill \raisebox{10pt}{\includegraphics[width=0.25\textwidth]{figures/teachITLogo.png} }
+\par 
 
-\section{Modulübersicht Test 2}\label{modulubersicht-test-2-1}
+\begin{center} \noindent\rule{\textwidth}{0.4pt}\\ \vspace{0.5 cm} {\large \textsf{ A Capitalized Title }}\\ \vspace{0.5 cm} {\LARGE \textbf{ \textsf{ A Capitalized Title: Something about a Package der sehr lang ist  }}}\\ \vspace{0.5 cm} {\Large \textsf{ A Capitalized Title: Something about a Package foo }}\\ \noindent\rule{\textwidth}{0.4pt}\\ \vspace{1 cm}Autoren: \\ \vspace{2 mm} FirstName LastName, Second Author \\ \end{center}
+
+\section*{Begriffe}
+
+\begin{minipage}{\textwidth} \hrule \begin{multicols}{2} \begin{itemize}[leftmargin=0mm] \item[] keywords \item[] not capitalized \item[] Java \end{itemize} \end{multicols} \vspace{-2mm} \hrule \end{minipage}
+
+\clearpage \begingroup \let\clearpage\relax \let\cleardoublepage\relax \chapter{ A Capitalized Title: Something about a Package foo } \endgroup 
+
+\section{Modulübersicht}\label{modulubersicht-1}
 
 Die beiden Konzepte Variablen und Datentypen sind für jede
 Programmierung grundlegend. Bei \textbf{Variablen} handelt es sich um
@@ -1107,12 +1308,12 @@ Digitale Daten werden immer durch Ziffern dargestellt. Daher auch der
 Name, \emph{digit} bedeutet Ziffer.
 
 \section{Darstellung von Zahlen und Zeichen im
-Computer}\label{darstellung-von-zahlen-und-zeichen-im-computer-1}
+Computer}\label{darstellung-von-zahlen-und-zeichen-im-computer-2}
 
 Um die Darstellung von Zeichen, Zahlen und Texten im Computer zu
 verstehen, muss man das \textbf{binäre System} verstehen.
 
-\subsection{Binäres System}\label{binares-system-1}
+\subsection{Binäres System}\label{binares-system-2}
 
 Alle Rechner stellen Information im binären System dar. Dieses kennt nur
 zwei Ziffern, nämlich 0 und 1 (im Gegensatz zum Dezimalsystem mit den
@@ -1124,7 +1325,7 @@ Bits werden zu einem \textbf{Byte} zusammengefasst. Ein Byte kann somit
 speichern.
 
 \subsection{Darstellung von Zahlen im binären
-System}\label{darstellung-von-zahlen-im-binaren-system-1}
+System}\label{darstellung-von-zahlen-im-binaren-system-2}
 
 Betrachten wir die Zahl 91, die binär mit 8 Bit als 01011011 dargestellt
 wird (siehe Tabelle \ref{tab:binaryConversation}). Wir reden deswegen in
@@ -1152,7 +1353,7 @@ auf. Im binären System können wir mit 8 Bit nur die ganzen Zahlen 0 bis
 auch ein grösserer Speicherbereich bereitgestellt werden.
 
 \subsection{Darstellung von Zeichen im binären
-System}\label{darstellung-von-zeichen-im-binaren-system-1}
+System}\label{darstellung-von-zeichen-im-binaren-system-2}
 
 Für die Darstellung von Zeichen im Computer wurde der so genannte
 \textbf{ASCII-Code} entwickelt. ASCII steht für \emph{American Standard
@@ -1231,7 +1432,187 @@ Dez & Zeichen & Bedeutung\\
 \caption{Nicht darstellbare Zeichen der ASCII-Tabelle}
 \end{table}
 
-\section{Datentypen}\label{datentypen-1}
+\section{Datentypen}\label{datentypen-2}
+
+Der \textbf{Datentyp} gibt an, welche Daten in einem Programm
+gespeichert und bearbeitet werden können. Programmiersprachen besitzen
+vordefinierte Datentypen, die sich in der Art der Interpretation der
+gespeicherten Daten und in der Grösse unterscheiden.
+
+\begin{itemize}
+\tightlist
+\item
+  Typ für Zahlenwerte
+\item
+  Typ für Zeichenwerte
+\item
+  Typ für Wahrheitswerte (Boolsche Werte) (siehe Modul 2)
+\end{itemize}
+
+Tabelle \ref{tab:datatypes} gibt einen Überblick über die wichtigsten
+Datentypen, die in vielen Programmiersprachen vorkommen.
+
+\begin{table}[!htbp]\centering 
+\begin{tabular}{@{}llll@{}}     
+\toprule
+ Typ & Beschreibung & Grösse & Wertebereich \\
+ & & in Bit & \\
+\midrule
+ boolean & Boolscher Wert & 1 & true oder false \\
+ char & Zeichen & 16 & Unicode-Zeichen \\
+ byte & Ganzzahl & 8 & $-128 \ldots 127 \;(-2^7 \ldots +2^{7}-1)$ \\
+ short & & 16 & $-32'768 \ldots  32'767 \;(-2^{15} \ldots +2^{15}-1)$ \\
+ int & & 32 & $-2'147'483'648 \ldots2'147'483'647 \;(-2^{31} \ldots +2^{31}-1)$ \\
+ long & & 64 & $-9'223'372'036'854'775'808\ldots$ \\
+ & & &  $9'223'372'036'854'775'807 \; (-2^{63} \ldots +2^{63}-1)$ \\
+ float & Gleitkommazahl & 32 & $+/- 3.40282347 \times 10^{38}$\\
+ double & & 64 & $+/- 1.79769313486231569 \times 10^{308}$ \\
+\bottomrule
+
+\end{tabular}
+\caption{Die wichtigsten Datentypen in Java}
+\label{tab:datatypes}
+\end{table}
+
+\clearpage \begingroup \let\clearpage\relax \let\cleardoublepage\relax \chapter{ Theorieteil } \endgroup 
+
+\section{Modulübersicht Test 2}\label{modulubersicht-test-2-1}
+
+Die beiden Konzepte Variablen und Datentypen sind für jede
+Programmierung grundlegend. Bei \textbf{Variablen} handelt es sich um
+Speicherbereiche, in denen Werte gespeichert werden können und der
+\textbf{Datentyp} gibt an, welche Werte erlaubt sind (z.B. nur
+Ganzzahlen). In einem Programm werden Daten verarbeitet, die sich in
+ihrer Art unterscheiden, z.B. Zeichen, Zahlen oder logische Daten.
+Digitale Daten werden immer durch Ziffern dargestellt. Daher auch der
+Name, \emph{digit} bedeutet Ziffer.
+
+\section{Darstellung von Zahlen und Zeichen im
+Computer}\label{darstellung-von-zahlen-und-zeichen-im-computer-3}
+
+Um die Darstellung von Zeichen, Zahlen und Texten im Computer zu
+verstehen, muss man das \textbf{binäre System} verstehen.
+
+\subsection{Binäres System}\label{binares-system-3}
+
+Alle Rechner stellen Information im binären System dar. Dieses kennt nur
+zwei Ziffern, nämlich 0 und 1 (im Gegensatz zum Dezimalsystem mit den
+Ziffern 0 bis 9). Eine solche Ziffer wird als \textbf{Bit} bezeichnet
+(Abkürzung für \emph{Binary Digit}, übersetzt „Binäre Ziffer``). Ein Bit
+stellt den kleinsten speicherbaren Wert in einem Computer dar. Jeweils 8
+Bits werden zu einem \textbf{Byte} zusammengefasst. Ein Byte kann somit
+2\textsuperscript{8} = 256 verschiedene Sequenzen von je 8 Bit
+speichern.
+
+\subsection{Darstellung von Zahlen im binären
+System}\label{darstellung-von-zahlen-im-binaren-system-3}
+
+Betrachten wir die Zahl 91, die binär mit 8 Bit als 01011011 dargestellt
+wird (siehe Tabelle \ref{tab:binaryConversation}). Wir reden deswegen in
+diesem Zusammenhang von der \textbf{Binärdarstellung} von 91 (und nicht
+von der Dezimaldarstellung, die für uns lesefreundlicher ist).
+
+\begin{table}[!htpb]
+\begin{tabular}{|l|p{.8cm}|p{.8cm}|p{.8cm}|p{.8cm}|p{.7cm}|p{.7cm}|p{.7cm}|p{.7cm}|p{.8cm}}
+\cline{1-9} \textbf{Bit} & 8 & 7 & 6 & 5 & 4 & 3 & 3 & 1 &\\
+\cline{1-9} \textbf{Binärwert} & 0 & 1 & 0 & 1 & 1 & 0 & 1 & 1 &\\
+\cline{1-9} \textbf{Wertigkeit} & $2^7=128$ & $2^6=64$ & $2^5=32$ & $2^4=16$ & $2^3=8$ & $2^2=4$ & $2^1=2$ & $2^0=1$ &\\
+\hline \textbf{Dezimalwert} & 0 & 64 & 0 & 16 & 8 & 0 & 2 & 1 & \multicolumn{1}{ p{.8cm}| }{= 91} \\
+\hline
+\end{tabular}
+\caption{Binäre Darstellung der Dezimalzahl 91. Details siehe Text.}
+\label{tab:binaryConversation}
+\end{table}
+
+Eine 8-Bit-Zahl, wie in unserem Beispiel, kann Werte zwischen 00000000
+(0 im Dezimalsystem) und 11111111 (255 im Dezimalsystem) speichern. Für
+die Umrechnung vom Binär- in den Dezimalwert multiplizieren wir für
+jedes Bit den Binärwert mit der Wertigkeit des Bits und summieren diese
+auf. Im binären System können wir mit 8 Bit nur die ganzen Zahlen 0 bis
+255 darstellen. Ist die Zahl, die wir darstellen wollen, grösser, muss
+auch ein grösserer Speicherbereich bereitgestellt werden.
+
+\subsection{Darstellung von Zeichen im binären
+System}\label{darstellung-von-zeichen-im-binaren-system-3}
+
+Für die Darstellung von Zeichen im Computer wurde der so genannte
+\textbf{ASCII-Code} entwickelt. ASCII steht für \emph{American Standard
+Code for Information Interchange}, was übersetzt so viel heisst wie
+Amerikanische Standardcodierung für den Datenaustausch. Mit Hilfe des
+7-Bit-ASCII-Codes können 128 verschiedene Zeichen (2\textsuperscript{7})
+dargestellt werden oder umgekehrt wird jedem Zeichen ein Bitmuster aus 7
+Bit zugeordnet (siehe Tabelle \ref{tab:ascii}). Die Zeichen entsprechen
+weitgehend einer Computertastatur. Der ASCII-Code wurde später auf 8 Bit
+erweitert, was die Darstellung von 256 Zeichen (2\textsuperscript{8})
+erlaubt.
+
+\begin{table}[!htbp]\centering
+\ra{1.1}
+\begin{tabular}{@{}llcllcllcll@{}}
+\toprule
+\multicolumn{2}{c}{0-31} & & \multicolumn{2}{c}{31-63} & &
+\multicolumn{2}{c}{64-95} & & \multicolumn{2}{c}{96-127}\\
+\cmidrule{1-2} \cmidrule{4-5} \cmidrule{7-8} \cmidrule{10-11}
+Dez & Zeichen & & Dez  & Zeichen & & Dez & Zeichen & & Dez  & Zeichen\\
+\midrule
+0  & NUL & & 32 &  SP & & 64 & @ & & 96  & ` \\
+1  & SOH & & 33 &  !  & & 65 & A & & 97  & a \\
+2  & STX & & 34 &  "' & & 66 & B & & 98  & b \\
+3  & ETX & & 35 &  \# & & 67 & C & & 99  & c \\
+4  & EOT & & 36 &  \$ & & 68 & D & & 100 & d \\
+5  & ENQ & & 37 &  \% & & 69 & E & & 101 & e \\
+6  & ACK & & 38 &  \& & & 70 & F & & 102 & f \\
+7  & BEL & & 39 &  '  & & 71 & G & & 103 & g \\
+8  & BS  & & 40 &  (  & & 72 & H & & 104 & h \\
+9  & HT  & & 41 &  )  & & 73 & I & & 105 & i \\
+10 & LF  & & 42 &  *  & & 74 & J & & 106 & j \\
+11 & VT  & & 43 &  +  & & 75 & K & & 107 & k \\
+12 & FF  & & 44 &  ,  & & 76 & L & & 108 & l \\
+13 & CR  & & 45 &  -  & & 77 & M & & 109 & m \\
+14 & SO  & & 46 &  .  & & 78 & N & & 110 & n \\
+15 & SI  & & 47 &  /  & & 79 & O & & 111 & o \\
+16 & DLE & & 48 &  0  & & 80 & P & & 112 & p \\
+17 & DC1 & & 49 &  1  & & 81 & Q & & 113 & q \\
+18 & DC2 & & 50 &  2  & & 82 & R & & 114 & r \\
+19 & DC3 & & 51 &  3  & & 83 & S & & 115 & s \\
+20 & DC4 & & 52 &  4  & & 84 & T & & 116 & t \\
+21 & NAK & & 53 &  5  & & 85 & U & & 117 & u \\
+22 & SYN & & 54 &  6  & & 86 & V & & 118 & v \\
+23 & ETB & & 55 &  7  & & 87 & W & & 119 & w \\
+24 & CAN & & 56 &  8  & & 88 & X & & 120 & x \\
+25 & EM  & & 57 &  9  & & 89 & Y & & 121 & y \\
+26 & SUB & & 58 &  :  & & 90 & Z & & 122 & z \\
+27 & ESC & & 59 &  ;  & & 91 & [ & & 123 & \{\\
+28 & FS  & & 60 &  <  & & 92 & $\backslash$ & & 124 & $\mid$\\
+29 & GS  & & 61 &  =  & & 93 & ]    & & 125 & \}  \\
+30 & RS  & & 62 &  >  & & 94 & \^{} & & 126 & \textasciitilde \\
+31 & US  & & 63 &  ?  & & 95 & \_   & & 127 & DEL \\
+\bottomrule
+\end{tabular}
+\caption {ASCII-Tabelle}
+\label{tab:ascii}
+\end{table}
+
+Die ASCII-Tabelle enthält auch nicht darstellbare Zeichen (wie etwa ein
+Zeichen, das einen Zeilenumbruch repräsentiert). Die wichtigsten sind in
+Tabelle \ref{tab:asciiHidden} dargestellt:
+
+\begin{table}[!htbp]\centering
+\begin{tabular}{lll}
+\toprule
+Dez & Zeichen & Bedeutung\\
+\midrule
+8   & BS & Backspace. Linkes Zeichen löschen\\
+10  & NL & New Line. Neue Zeile beginnen\\
+32  & SP & Space. Leerzeichen \\
+127 & DEL & Delete. Rechtes Zeichen löschen \\
+\bottomrule
+\end{tabular}
+\label{tab:asciiHidden}
+\caption{Nicht darstellbare Zeichen der ASCII-Tabelle}
+\end{table}
+
+\section{Datentypen}\label{datentypen-3}
 
 Der \textbf{Datentyp} gibt an, welche Daten in einem Programm
 gespeichert und bearbeitet werden können. Programmiersprachen besitzen
