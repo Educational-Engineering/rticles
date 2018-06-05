@@ -3,7 +3,6 @@
 
 
 \par
-\raisebox{14pt}{\includegraphics[width=0.25\textwidth]{figures/teachITLogo.png}}%
 \hfill
 \raisebox{0pt}{\includegraphics[width=0.25\textwidth]{figures/Logo.png}}%
 \par
@@ -13,15 +12,15 @@
 \noindent\rule{\textwidth}{0.4pt}
 
 <% if defined?(localConfig['course']) %>
-\vspace{0.5 cm} {\large \textsf{<%= localConfig['course'] %>}}
+\vspace{0.4 cm} {\large \textsf{<%= localConfig['course'] %>}}
 <% end %>
-\vspace{0.5 cm} {\LARGE \textbf{ \textsf{<%= localConfig['title'] %> }}}\\
-\vspace{0.5 cm} {\Large \textsf{<%= localConfig['subtitle'] %>}}
+\vspace{0.4 cm} {\LARGE \textbf{ \textsf{<%= localConfig['title'] %> }}}\\
+\vspace{0.4 cm} {\Large \textsf{<%= localConfig['subtitle'] %>}}
 \noindent\rule{\textwidth}{0.4pt}
 <% if config['lang'] != "ngerman" %>
-\vspace{1 cm}Authors: \\ \vspace{2 mm}<%= localConfig['authors'] %>
+\vspace{0.6 cm}Authors: \\ \vspace{2 mm}<%= localConfig['authors'] %>
 <% else %>
-  	\vspace{1 cm}Autoren: \\ \vspace{2 mm}<%= localConfig['authors'] %> \\
+  	\vspace{0.6 cm}Autoren: \\ \vspace{2 mm}<%= localConfig['authors'] %> \\
   	<% end %>
 \end{center}
 
