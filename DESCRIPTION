@@ -1,8 +1,8 @@
 Package: eTutorialsLayout
 Type: Package
 Title: Article Formats for R Markdown
-Version: 0.3
-Date: 2017-08-07
+Version: 0.4
+Date: 2018-07-02
 Authors@R: c(
   person("JJ", "Allaire", role = c("aut", "cre"), email = "jj@rstudio.com"),
   person(family = "R Foundation", role = c("aut", "cph")),
