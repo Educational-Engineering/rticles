@@ -1,10 +1,12 @@
-FROM wkusnierczyk/rmarkdown
+FROM r-base
 MAINTAINER DavidSichau <sichau@inf.ethz.ch>
+
 
 RUN locale-gen en_US.UTF-8
 ENV LANG="en_US.UTF-8"  \
     LANGUAGE="en_US:en"  \
     LC_ALL="en_US.UTF-8"
+
 
 RUN \
   apt-get update && \
@@ -23,8 +25,13 @@ RUN \
     texlive-lang-german \
     texlive-fonts-extra \
     cm-super \
-    fontconfig && \
+    libcurl4-gnutls-dev \
+    libssl-dev \
+    pandoc \
+    fontconfig
+RUN \
   R -e "install.packages(c('devtools'))" \
+  R -e "install.packages(c('rmarkdown'))" \
   R -e "devtools::install_github('Educational-Engineering/rticles')"
 
 CMD ["nginx"]
