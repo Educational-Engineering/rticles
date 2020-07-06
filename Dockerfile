@@ -1,4 +1,4 @@
-FROM rocker/tidyverse
+FROM rocker/tidyverse:3.6.3
 MAINTAINER DavidSichau <sichau@inf.ethz.ch>
 
 
